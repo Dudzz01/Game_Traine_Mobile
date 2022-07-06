@@ -16,7 +16,7 @@ public class Script_Player : MonoBehaviour
     {
         
         speed_v = 20; //Velocidade Vertical do player
-        Application.targetFrameRate = 60;
+       
     }
         
     
