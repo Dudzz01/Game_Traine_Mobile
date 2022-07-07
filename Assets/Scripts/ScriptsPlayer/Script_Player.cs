@@ -9,23 +9,26 @@ public class Script_Player : MonoBehaviour
     private float speed_v;
     public float speed_h;
     private bool jump;
+    public bool isAlive;
     
 
     // Start executa o que esta dentro dele através da inicializacao do objeto
     void Start()
     {
-        
         speed_v = 20; //Velocidade Vertical do player
-       
+        isAlive = true;
     }
         
     
 
     // Update executa o que esta dentro dele a todo instante to jogo
-    /*void Update()
+    void Update()
     {
-        
-    }*/
+      if(!isAlive)
+      {
+        Destroy(this.gameObject);
+      }
+    }
 
     void FixedUpdate() {
 
@@ -33,13 +36,16 @@ public class Script_Player : MonoBehaviour
        {
         rig.velocity = new Vector2(0,16); // Caso o player ultrapasse a velocidade 20, a velocidade dele vertical fica 16
        }
-
-       if(jump == true && rig.velocity.y <= 20)
+    
+    
+         if(jump == true && rig.velocity.y <= 20)
        {
           rig.AddForce(new Vector2(0,speed_v), ForceMode2D.Impulse);
           jump = false;
        }
         Movement();
+    
+      
     }
     void Movement()
     {
@@ -57,6 +63,10 @@ public class Script_Player : MonoBehaviour
         {
             jump = false;
         }
+        if(collision.gameObject.tag == "Enemy")
+        {
+            isAlive = false;
+        }
     }
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -72,6 +82,10 @@ public class Script_Player : MonoBehaviour
             transform.position = new Vector3((transform.position.x * -1) - 0.1f, transform.position.y, transform.position.z);
         }
         //Obs.: Precisei desativar a cinemachine pois a cam estava seguindo o player também no eixo x, e assim, a logica não funcionava
+        if(col.gameObject.tag == "Enemy" || col.gameObject.tag == "EnemyBullet")
+        {
+            isAlive = false;
+        }
     }
 
 

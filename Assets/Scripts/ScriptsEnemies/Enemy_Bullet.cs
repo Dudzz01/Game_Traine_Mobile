@@ -35,8 +35,8 @@ public class Enemy_Bullet : MonoBehaviour
         }
         else
         {
-          box_bullet.isTrigger = false;
-          Destroy(this.gameObject); // possivel mudancas nessa estrutura com implementacoes de mais condicoes
+         box_bullet.isTrigger = false;
+         Destroy(this.gameObject); // possivel mudancas nessa estrutura com implementacoes de mais condicoes   
         }
         }
         
