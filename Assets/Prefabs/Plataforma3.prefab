@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1361677978236617506}
   - component: {fileID: -3810020569333538984}
   m_Layer: 0
-  m_Name: Plataform
+  m_Name: Plataforma3
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,7 +120,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 404dba7b7179b134387d8e0f825ecf1e, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 6eaf6136a56ad984da6ed3346d652cb5, type: 3}
   m_Color: {r: 0.8679245, g: 0.1514774, b: 0.1514774, a: 1}
   m_FlipX: 0
   m_FlipY: 0

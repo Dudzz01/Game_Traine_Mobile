@@ -5,18 +5,22 @@ using UnityEngine;
 public class Script_Player : MonoBehaviour
 {
     
-    public Rigidbody2D rig;
-    private float speed_v;
-    public float speed_h;
-    private bool jump;
-    public bool isAlive;
+    public GameObject right;
+    public GameObject left;
+    public Rigidbody2D rig; // RigidBody2D do player
+    private float speed_v; // Velocidade Vertical do player
+    public float speed_h; // Velocidade Horizontal do player
+    private bool jump; // Variavel que possibilita o jump
+    private bool isAlive; // Variavel que define se o player está vivo ou morto
+
+    
     
 
     // Start executa o que esta dentro dele através da inicializacao do objeto
     void Start()
     {
-        speed_v = 20; //Velocidade Vertical do player
-        isAlive = true;
+        speed_v = 25; //Velocidade Vertical do player
+        isAlive = true; // Player está vivo
     }
         
     
@@ -24,26 +28,31 @@ public class Script_Player : MonoBehaviour
     // Update executa o que esta dentro dele a todo instante to jogo
     void Update()
     {
+      right.transform.position = new Vector3(right.transform.position.x,this.gameObject.transform.position.y,right.transform.position.z);
+      left.transform.position = new Vector3(left.transform.position.x,this.gameObject.transform.position.y,left.transform.position.z);
       if(!isAlive)
       {
-        Destroy(this.gameObject);
+        Destroy(this.gameObject); // Player é destruido
       }
     }
 
     void FixedUpdate() {
 
-       if(rig.velocity.y >21) // Condicao para que o player consiga no maximo pular com 20 de velocidade( nao consegue ter uma velocidade maior que isso em seu pulo, utilizei esse codigo para corrigir um bug)
+        
+
+       if(rig.velocity.y >26) // Condicao para que o player consiga no maximo pular com 20 de velocidade( nao consegue ter uma velocidade maior que isso em seu pulo, utilizei esse codigo para corrigir um bug)
        {
-        rig.velocity = new Vector2(0,16); // Caso o player ultrapasse a velocidade 20, a velocidade dele vertical fica 16
+        rig.velocity = new Vector2(0,22); // Caso o player ultrapasse a velocidade 20, a velocidade dele vertical fica 16
        }
     
     
-         if(jump == true && rig.velocity.y <= 20)
-       {
-          rig.AddForce(new Vector2(0,speed_v), ForceMode2D.Impulse);
-          jump = false;
-       }
-        Movement();
+         if(jump == true && rig.velocity.y <= 26)
+         {
+            rig.AddForce(new Vector2(0,speed_v), ForceMode2D.Impulse);
+            jump = false;
+         }
+
+          Movement();
     
       
     }
@@ -63,9 +72,9 @@ public class Script_Player : MonoBehaviour
         {
             jump = false;
         }
-        if(collision.gameObject.tag == "Enemy")
+        if(collision.gameObject.tag == "Enemy"|| collision.gameObject.tag == "EnemyBullet")
         {
-            isAlive = false;
+            isAlive = false; // mata o jogador
         }
     }
     void OnTriggerEnter2D(Collider2D col)
@@ -75,16 +84,16 @@ public class Script_Player : MonoBehaviour
         //Diminuindo um valor pequeno, apenas para garantir que, nesse "teletransporte", ele venha a se chocar com a outra borda
         if (col.CompareTag("RightBorder"))
         {
-            transform.position = new Vector3((transform.position.x * -1) + 0.1f, transform.position.y, transform.position.z);
+            transform.position = new Vector3((transform.position.x * -1) + 0.3f, transform.position.y, transform.position.z);
         }
         if (col.CompareTag("LeftBorder"))
         {
-            transform.position = new Vector3((transform.position.x * -1) - 0.1f, transform.position.y, transform.position.z);
+            transform.position = new Vector3((transform.position.x * -1) - 0.3f, transform.position.y, transform.position.z);
         }
         //Obs.: Precisei desativar a cinemachine pois a cam estava seguindo o player também no eixo x, e assim, a logica não funcionava
         if(col.gameObject.tag == "Enemy" || col.gameObject.tag == "EnemyBullet")
         {
-            isAlive = false;
+            isAlive = false; // mata o jogador
         }
     }
 
