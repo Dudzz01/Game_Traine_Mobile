@@ -28,8 +28,13 @@ public class Script_Player : MonoBehaviour
     }*/
 
     void FixedUpdate() {
-       
-       if(jump == true)
+
+       if(rig.velocity.y >21) // Condicao para que o player consiga no maximo pular com 20 de velocidade( nao consegue ter uma velocidade maior que isso em seu pulo, utilizei esse codigo para corrigir um bug)
+       {
+        rig.velocity = new Vector2(0,16); // Caso o player ultrapasse a velocidade 20, a velocidade dele vertical fica 16
+       }
+
+       if(jump == true && rig.velocity.y <= 20)
        {
           rig.AddForce(new Vector2(0,speed_v), ForceMode2D.Impulse);
           jump = false;
@@ -40,11 +45,13 @@ public class Script_Player : MonoBehaviour
     {
         rig.velocity = new Vector2(Input.acceleration.x * speed_h * Time.fixedDeltaTime, rig.velocity.y);//rig.velocity.y garante que esse eixo não vai mudar com essa linha
     }//Input.acceleration é a classe responsável pelo acelerometro. Ao chamar .x, ela usa apenas esse eixo para a movimentação do player
+   
+    
     void OnCollisionEnter2D(Collision2D collision) // Um metodo que basicamente verifica a colisao do nosso player com qualquer outro objeto que tenha um colisor
     {
-        if(collision.gameObject.tag == "Ground") // Se o player colidir com um objeto que tenha um colisor e tenha a etiqueta "Ground", executará um impulso
+        if(collision.gameObject.tag == "Ground" && collision.gameObject.transform.position.y+1 < this.transform.position.y) // Se o player colidir com um objeto que tenha um colisor e tenha a etiqueta "Ground" e o y dele for maior que o y da plataforma que esta colidindo, executará um impulso
         {
-            jump = true;
+           jump = true;
         }
         else
         {
