@@ -34,11 +34,12 @@ public class Script_Player : MonoBehaviour
     {
       right.transform.position = new Vector3(right.transform.position.x,this.gameObject.transform.position.y,right.transform.position.z);
       left.transform.position = new Vector3(left.transform.position.x,this.gameObject.transform.position.y,left.transform.position.z);
-      if(!isAlive)
+      freezeO2();
+      if(isAlive == false)
       {
         Destroy(this.gameObject); // Player é destruido
       }
-        freezeO2();
+        
     }
 
     void FixedUpdate() {
@@ -112,6 +113,7 @@ public class Script_Player : MonoBehaviour
         {
             PO2.CanDecreasing = false;
             o2FreezeCount -= Time.deltaTime;
+            isAlive = true;
         }
         if(o2FreezeCount <= 0) 
         {
