@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class PlayerO2 : MonoBehaviour
 {
-    public float MaxO2;
-    public float ActualO2;
-    public bool CanDecreasing = true;//Com esse bool true, o O2 cai. Se false, ele para de cair
-    public bool GameOver = false;
+    private float MaxO2;
+    private float ActualO2;
+    private bool CanDecreasing = true;//Com esse bool true, o O2 cai. Se false, ele para de cair
+    private bool GameOver = false;
 
     void Start()
     {
+        CanDecreasing = true;
+        GameOver = false;
+        MaxO2 = 15;
         ActualO2 = MaxO2;
     }
 
@@ -19,6 +22,16 @@ public class PlayerO2 : MonoBehaviour
     {
         DecreasingO2();
         Script_GameController.instance.ControllO2Bar(MaxO2, ActualO2);//Modo de chamar a fun��o do GameController, ap�s ter feito o singleton
+    }
+
+    public void setDecreasingO2(bool CanDecreasing)
+    {
+        this.CanDecreasing = CanDecreasing;
+    }
+
+    public bool getGameOver()
+    {
+        return this.GameOver;
     }
 
     void DecreasingO2()

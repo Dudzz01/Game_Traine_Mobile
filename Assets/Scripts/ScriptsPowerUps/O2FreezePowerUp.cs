@@ -6,7 +6,7 @@ public class O2FreezePowerUp : MonoBehaviour
 {
     
     public GameObject player;
-    public int powerUpTime;
+    private int powerUpTime;
     
     void Start()
     {
@@ -18,7 +18,7 @@ public class O2FreezePowerUp : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            player.GetComponent<Script_Player>().o2FreezeCount = powerUpTime; //Acessa a variavel o2FreezeCount do player e muda o valor dela para o powerUpTime
+            player.GetComponent<Script_Player>().setO2FreezeCount(powerUpTime); //Acessa a variavel o2FreezeCount do player e muda o valor dela para o powerUpTime
             Destroy(this.gameObject); //Destroi o powerUp
         }
     }

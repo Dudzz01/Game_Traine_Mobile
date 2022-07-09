@@ -9,8 +9,8 @@ public class Script_Player : MonoBehaviour
     public GameObject left;
     public Rigidbody2D rig; // RigidBody2D do player
     private float speed_v; // Velocidade Vertical do player
-    public float speed_h; // Velocidade Horizontal do player
-    public float o2FreezeCount;
+    private float speed_h; // Velocidade Horizontal do player
+    private float o2FreezeCount;
     private bool jump; // Variavel que possibilita o jump
     private bool isAlive; // Variavel que define se o player está vivo ou morto
     
@@ -22,19 +22,19 @@ public class Script_Player : MonoBehaviour
     // Start executa o que esta dentro dele através da inicializacao do objeto
     void Start()
     {
+        speed_h = 1000;
         speed_v = 25; //Velocidade Vertical do player
         isAlive = true; // Player está vivo
         PO2 = gameObject.GetComponent<PlayerO2>();//Acessando o script do oxigênio, e todas as suas variaveis e metodos publicos
     }
         
-    
-
     // Update executa o que esta dentro dele a todo instante to jogo
     void Update()
     {
       right.transform.position = new Vector3(right.transform.position.x,this.gameObject.transform.position.y,right.transform.position.z);
       left.transform.position = new Vector3(left.transform.position.x,this.gameObject.transform.position.y,left.transform.position.z);
       freezeO2();
+      
       if(isAlive == false)
       {
         Destroy(this.gameObject); // Player é destruido
@@ -44,32 +44,32 @@ public class Script_Player : MonoBehaviour
 
     void FixedUpdate() {
 
-      if (PO2.GameOver)//Se não deu game over no script do PlayerO2
+      if (PO2.getGameOver() == true)//Se deu game over
       {
          Destroy(this.gameObject);
       }
   
-       if(rig.velocity.y >26) // Condicao para que o player consiga no maximo pular com 20 de velocidade( nao consegue ter uma velocidade maior que isso em seu pulo, utilizei esse codigo para corrigir um bug)
-       {
+      if(rig.velocity.y >26) // Condicao para que o player consiga no maximo pular com 20 de velocidade( nao consegue ter uma velocidade maior que isso em seu pulo, utilizei esse codigo para corrigir um bug)
+      {
         rig.velocity = new Vector2(0,22); // Caso o player ultrapasse a velocidade 20, a velocidade dele vertical fica 16
-       }
+      }
     
     
-         if(jump == true && rig.velocity.y <= 26)
-         {
-            rig.AddForce(new Vector2(0,speed_v), ForceMode2D.Impulse);
-            jump = false;
-         }
+      if(jump == true && rig.velocity.y <= 26)
+      {
+         rig.AddForce(new Vector2(0,speed_v), ForceMode2D.Impulse);
+         jump = false;
+      }
 
           Movement();
-        
-        
       
     }
-    void Movement()
+
+
+    void Movement()//Input.acceleration é a classe responsável pelo acelerometro. Ao chamar .x, ela usa apenas esse eixo para a movimentação do player
     {
         rig.velocity = new Vector2(Input.acceleration.x * speed_h * Time.fixedDeltaTime, rig.velocity.y);//rig.velocity.y garante que esse eixo não vai mudar com essa linha
-    }//Input.acceleration é a classe responsável pelo acelerometro. Ao chamar .x, ela usa apenas esse eixo para a movimentação do player
+    }
    
     
     void OnCollisionEnter2D(Collision2D collision) // Um metodo que basicamente verifica a colisao do nosso player com qualquer outro objeto que tenha um colisor
@@ -87,6 +87,7 @@ public class Script_Player : MonoBehaviour
             isAlive = false; // mata o jogador
         }
     }
+
     void OnTriggerEnter2D(Collider2D col)
     {
         //Efeito de atravessar a tela: Existem 2 colisores como filhos da camera (ou seja, onde a camera for, eles irão atras).
@@ -107,17 +108,22 @@ public class Script_Player : MonoBehaviour
         }
     }
 
+    public void setO2FreezeCount(float o2FreezeCount)
+    {
+        this.o2FreezeCount = o2FreezeCount;
+    }
+    
     void freezeO2() //Método para congelar o oxigenio do player
     {
         if (o2FreezeCount > 0) 
         {
-            PO2.CanDecreasing = false;
+            PO2.setDecreasingO2(false);
             o2FreezeCount -= Time.deltaTime;
             isAlive = true;
         }
         if(o2FreezeCount <= 0) 
         {
-            PO2.CanDecreasing = true;
+            PO2.setDecreasingO2(true);
         }
     }
 
