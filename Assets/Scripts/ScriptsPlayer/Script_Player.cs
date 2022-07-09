@@ -9,12 +9,12 @@ public class Script_Player : MonoBehaviour
     private float speed_v;
     public float speed_h;
     private bool jump;
-    
+    private PlayerO2 PO2;
 
     // Start executa o que esta dentro dele através da inicializacao do objeto
     void Start()
     {
-        
+        PO2 = gameObject.GetComponent<PlayerO2>();//Acessando o script do oxigênio, e todas as suas variaveis e metodos publicos
         speed_v = 20; //Velocidade Vertical do player
        
     }
@@ -27,15 +27,23 @@ public class Script_Player : MonoBehaviour
         
     }*/
 
-    void FixedUpdate() {
-       
-       if(jump == true)
-       {
-          rig.AddForce(new Vector2(0,speed_v), ForceMode2D.Impulse);
-          jump = false;
-       }
-        Movement();
+    void FixedUpdate() 
+    {
+        if (!PO2.GameOver)//Se não deu game over no script do PlayerO2
+        {
+            if (jump == true)
+            {
+                rig.AddForce(new Vector2(0, speed_v), ForceMode2D.Impulse);
+                jump = false;
+            }
+            Movement();
+        }
+        else//Se deu...
+        {
+            Debug.Log("Game Over!");//Game Over, e, assim, bloqueia a movimentação do player(já que o if não vai mais ser lido)
+        }
     }
+
     void Movement()
     {
         rig.velocity = new Vector2(Input.acceleration.x * speed_h * Time.fixedDeltaTime, rig.velocity.y);//rig.velocity.y garante que esse eixo não vai mudar com essa linha

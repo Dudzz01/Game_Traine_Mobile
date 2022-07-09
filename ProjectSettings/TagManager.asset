@@ -9,6 +9,7 @@ TagManager:
   - RightBorder
   - Enemy
   - EnemyBullet
+  - CapsuleO2
   layers:
   - Default
   - TransparentFX
