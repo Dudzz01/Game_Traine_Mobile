@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class Enemy_Dinamic : MonoBehaviour
 {
-    public float speed;
+    private float speed;
     void Start()
     {
         speed = 5f;
     }
 
     
-    void Update()
+    /*void Update()
     {
         
-    }
+    }*/
 
     void FixedUpdate() 
     {
 
-        transform.position = new Vector3(transform.position.x + speed * Time.deltaTime, transform.position.y);
+       MovimentEnemy();
 
     }
     void OnTriggerEnter2D(Collider2D col) 
@@ -32,6 +32,11 @@ public class Enemy_Dinamic : MonoBehaviour
         {
             speed = 5f;
         }
+    }
+
+    void MovimentEnemy()
+    {
+      transform.position = new Vector3(transform.position.x + speed * Time.deltaTime, transform.position.y); // Movimentacao
     }
     
 }

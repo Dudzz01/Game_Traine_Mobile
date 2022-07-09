@@ -22,7 +22,7 @@ public class Enemy_Bullet : MonoBehaviour
 */
     void FixedUpdate() 
     {
-       rig.AddForce(new Vector2(0,-1.32f),ForceMode2D.Impulse); // impulso do tiro do inimigo ir para baixo
+       MovimentBullet();
     }
        
 
@@ -39,6 +39,11 @@ public class Enemy_Bullet : MonoBehaviour
          Destroy(this.gameObject); // possivel mudancas nessa estrutura com implementacoes de mais condicoes   
         }
         }
+
+   void MovimentBullet()
+   {
+      rig.AddForce(new Vector2(0,-1.32f),ForceMode2D.Impulse); // impulso do tiro do inimigo ir para baixo 
+   }
         
 
      
