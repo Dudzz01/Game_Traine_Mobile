@@ -12,7 +12,9 @@ public class Script_Player : MonoBehaviour
     public float speed_h; // Velocidade Horizontal do player
     private bool jump; // Variavel que possibilita o jump
     private bool isAlive; // Variavel que define se o player está vivo ou morto
-
+    
+    private PlayerO2 PO2;
+    
     
     
 
@@ -21,6 +23,7 @@ public class Script_Player : MonoBehaviour
     {
         speed_v = 25; //Velocidade Vertical do player
         isAlive = true; // Player está vivo
+        PO2 = gameObject.GetComponent<PlayerO2>();//Acessando o script do oxigênio, e todas as suas variaveis e metodos publicos
     }
         
     
@@ -38,8 +41,11 @@ public class Script_Player : MonoBehaviour
 
     void FixedUpdate() {
 
-        
-
+      if (PO2.GameOver)//Se não deu game over no script do PlayerO2
+      {
+         Destroy(this.gameObject);
+      }
+  
        if(rig.velocity.y >26) // Condicao para que o player consiga no maximo pular com 20 de velocidade( nao consegue ter uma velocidade maior que isso em seu pulo, utilizei esse codigo para corrigir um bug)
        {
         rig.velocity = new Vector2(0,22); // Caso o player ultrapasse a velocidade 20, a velocidade dele vertical fica 16
@@ -53,7 +59,8 @@ public class Script_Player : MonoBehaviour
          }
 
           Movement();
-    
+        
+        
       
     }
     void Movement()
@@ -84,11 +91,11 @@ public class Script_Player : MonoBehaviour
         //Diminuindo um valor pequeno, apenas para garantir que, nesse "teletransporte", ele venha a se chocar com a outra borda
         if (col.CompareTag("RightBorder"))
         {
-            transform.position = new Vector3((transform.position.x * -1) + 0.3f, transform.position.y, transform.position.z);
+            transform.position = new Vector3((transform.position.x * -1) + (float)0.3, transform.position.y, transform.position.z);
         }
         if (col.CompareTag("LeftBorder"))
         {
-            transform.position = new Vector3((transform.position.x * -1) - 0.3f, transform.position.y, transform.position.z);
+            transform.position = new Vector3((transform.position.x * -1) - (float)0.3, transform.position.y, transform.position.z);
         }
         //Obs.: Precisei desativar a cinemachine pois a cam estava seguindo o player também no eixo x, e assim, a logica não funcionava
         if(col.gameObject.tag == "Enemy" || col.gameObject.tag == "EnemyBullet")
