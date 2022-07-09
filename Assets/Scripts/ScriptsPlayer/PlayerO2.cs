@@ -6,8 +6,7 @@ public class PlayerO2 : MonoBehaviour
 {
     public float MaxO2;
     public float ActualO2;
-
-    private bool CanDecreasing = true;//Com esse bool true, o O2 cai. Se false, ele para de cair
+    public bool CanDecreasing = true;//Com esse bool true, o O2 cai. Se false, ele para de cair
     public bool GameOver = false;
 
     void Start()

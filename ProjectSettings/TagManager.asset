@@ -9,6 +9,8 @@ TagManager:
   - RightBorder
   - Enemy
   - EnemyBullet
+  - CapsuleO2
+  - O2FreezePowerUp
   layers:
   - Default
   - TransparentFX

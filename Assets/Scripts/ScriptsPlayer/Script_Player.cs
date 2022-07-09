@@ -10,6 +10,7 @@ public class Script_Player : MonoBehaviour
     public Rigidbody2D rig; // RigidBody2D do player
     private float speed_v; // Velocidade Vertical do player
     public float speed_h; // Velocidade Horizontal do player
+    public float o2FreezeCount;
     private bool jump; // Variavel que possibilita o jump
     private bool isAlive; // Variavel que define se o player está vivo ou morto
     
@@ -37,6 +38,7 @@ public class Script_Player : MonoBehaviour
       {
         Destroy(this.gameObject); // Player é destruido
       }
+        freezeO2();
     }
 
     void FixedUpdate() {
@@ -104,5 +106,17 @@ public class Script_Player : MonoBehaviour
         }
     }
 
+    void freezeO2() //Método para congelar o oxigenio do player
+    {
+        if (o2FreezeCount > 0) 
+        {
+            PO2.CanDecreasing = false;
+            o2FreezeCount -= Time.deltaTime;
+        }
+        if(o2FreezeCount <= 0) 
+        {
+            PO2.CanDecreasing = true;
+        }
+    }
 
 }
