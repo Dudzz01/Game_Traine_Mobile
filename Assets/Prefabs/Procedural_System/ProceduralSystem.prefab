@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -1545335829709368102}
   - component: {fileID: 1702197936010637036}
   - component: {fileID: 5914101093369350142}
+  - component: {fileID: -1679281015753852894}
   m_Layer: 0
   m_Name: ProceduralSystem
   m_TagString: Untagged
@@ -65,7 +66,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -133,3 +134,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-1679281015753852894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5075881467965604000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7c38d33892c42e489bd9fd3886f065a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1984737906999601073, guid: 6ba254ce07f421442aad0577a1050b01, type: 3}
+  spawner_plat: {fileID: 4643661938250193187, guid: b2099b0d30cb718449151cb743be37a4, type: 3}

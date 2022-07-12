@@ -1,31 +1,39 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Procedural_System : MonoBehaviour
 {
 
-    
+     
+    [SerializeField]
+    private GameObject player;
+    [SerializeField]
+    private GameObject spawner_plat;
+
+    private float pos_y;
    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
-        
+        pos_y = spawner_plat.GetComponent<Spawner_Plataform>().GetPosY();
     }
 
     void OnTriggerEnter2D(Collider2D collision) // Um metodo que basicamente verifica a colisao do nosso destroyer com qualquer outro objeto que tenha um colisor
     {
         if(collision.gameObject.tag == "Ground" ) 
         {
-           Destroy(collision.gameObject);
-           //Instantiate(collision.gameObject, new Vector3(Random.Range(this.gameObject.transform.position.x+20,this.gameObject.transform.)), );  Irei finalizar esse codigo a noite
-           
+         //Destroy(collision.gameObject);
+         if(collision.gameObject.name.StartsWith("Plataform") || collision.gameObject.name.StartsWith("Plataform2") || collision.gameObject.name.StartsWith("Plataforma3"))
+         {
+          collision.gameObject.transform.position = new Vector2(Random.Range(-10f,10f), pos_y );
+          Debug.Log(pos_y);
+         }
+         else if(collision.gameObject.name.StartsWith("ground"))
+         {
+            Destroy(collision.gameObject);
+         }
         }
        
         
