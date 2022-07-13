@@ -11,6 +11,7 @@ TagManager:
   - EnemyBullet
   - CapsuleO2
   - O2FreezePowerUp
+  - ImpulsePowerUp
   layers:
   - Default
   - TransparentFX
