@@ -12,13 +12,6 @@ public class ImpulsoPowerUp : MonoBehaviour
         player = GameObject.Find("player");
         poderImpulso = 50f;
     }
-
-   
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D col) 
     {
         if(col.CompareTag("Player"))
@@ -27,8 +20,4 @@ public class ImpulsoPowerUp : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-
-    
-
-
 }

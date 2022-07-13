@@ -15,7 +15,6 @@ public class Script_Player : MonoBehaviour
     private bool jump; // Variavel que possibilita o jump
     private bool isAlive; // Variavel que define se o player está vivo ou morto
     private PlayerO2 PO2;
-    public bool active_pwp;
     public bool canImpulse;
     public float impulseTimer, impulseCount;
     public float invulnerabilidadeCount;
@@ -29,7 +28,6 @@ public class Script_Player : MonoBehaviour
     void Start()
     {
         impulseTimer = 0.5f;
-        active_pwp = false;
         canImpulse = false;
         speed_h = 1000;
         speed_v = 25; //Velocidade Vertical do player
@@ -49,57 +47,35 @@ public class Script_Player : MonoBehaviour
       if (isAlive == false)
       {
         Destroy(this.gameObject); // Player é destruido
-      }
-
-     
-        
+      } 
     }
-     
-    
 
-    void FixedUpdate() {
+    void FixedUpdate() 
+    {
 
-      
-
-      if (PO2.getGameOver() == true)//Se deu game over
-      {
-         Destroy(this.gameObject);
-      }
-  
-      if(rig.velocity.y >26 && active_pwp == false) // Condicao para que o player consiga no maximo pular com 20 de velocidade( nao consegue ter uma velocidade maior que isso em seu pulo, utilizei esse codigo para corrigir um bug)
-      {
-        rig.velocity = new Vector2(0,22); // Caso o player ultrapasse a velocidade 20, a velocidade dele vertical fica 16
-      }
-      
-    
-    
-      if(jump == true && rig.velocity.y <= 26 && active_pwp == false )
-      {
-         rig.AddForce(new Vector2(0,speed_v), ForceMode2D.Impulse);
-         jump = false;
-      }
-
-          Movement();
+        if (PO2.getGameOver() == true)//Se deu game over
+        {
+            Destroy(this.gameObject);
+        }
+        if(rig.velocity.y >26) // Condicao para que o player consiga no maximo pular com 20 de velocidade( nao consegue ter uma velocidade maior que isso em seu pulo, utilizei esse codigo para corrigir um bug)
+        {
+            rig.velocity = new Vector2(0,22); // Caso o player ultrapasse a velocidade 20, a velocidade dele vertical fica 16
+        }
+        if(jump == true && rig.velocity.y <= 26)
+        {
+            rig.AddForce(new Vector2(0,speed_v), ForceMode2D.Impulse);
+            jump = false;
+        }
+        Movement();
         impulso();
-      
     }
-
-     
-
 
     public void Movement()//Input.acceleration é a classe responsável pelo acelerometro. Ao chamar .x, ela usa apenas esse eixo para a movimentação do player
     {
         rig.velocity = new Vector2(Input.acceleration.x * speed_h * Time.fixedDeltaTime, rig.velocity.y);//rig.velocity.y garante que esse eixo não vai mudar com essa linha
     }
-
-    
-   
-    
     void OnCollisionEnter2D(Collision2D collision) // Um metodo que basicamente verifica a colisao do nosso player com qualquer outro objeto que tenha um colisor
     {
-       if(active_pwp == false)
-       {
-     
          if(collision.gameObject.tag == "Ground" && collision.gameObject.transform.position.y+1 < this.transform.position.y) // Se o player colidir com um objeto que tenha um colisor e tenha a etiqueta "Ground" e o y dele for maior que o y da plataforma que esta colidindo, executará um impulso
          {
             jump = true;
@@ -115,24 +91,11 @@ public class Script_Player : MonoBehaviour
              {
                 isAlive = false; // mata o jogador
              }
-         }
-
-       }
-       else
-       {
-           if(collision.gameObject.tag == "Enemy"|| collision.gameObject.tag == "EnemyBullet")
-           {
-              if(!invulneravel)
+             if(invulneravel)
              {
-                isAlive = false; // mata o jogador
+                Destroy(collision.gameObject);
              }
-             Destroy(collision.gameObject);
-           }
-       }
-    
-     
-     
-        
+         }
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -149,31 +112,17 @@ public class Script_Player : MonoBehaviour
             transform.position = new Vector3((transform.position.x * -1) - (float)0.3, transform.position.y, transform.position.z);
         }
         //Obs.: Precisei desativar a cinemachine pois a cam estava seguindo o player também no eixo x, e assim, a logica não funcionava
-       
-        if(active_pwp == false)
-       {
-
           if(col.gameObject.tag == "Enemy" || col.gameObject.tag == "EnemyBullet")
           {
-               if(!invulneravel)
+            if(!invulneravel)
              {
                 isAlive = false; // mata o jogador
              }
+            if(invulneravel)
+            {
+                Destroy(col.gameObject);
+            }
           }
-       }
-        else
-        {
-           if(col.gameObject.tag == "Enemy"|| col.gameObject.tag == "EnemyBullet")
-           {
-              if(!invulneravel)
-             {
-                isAlive = false; // mata o jogador
-             }
-             Destroy(col.gameObject);
-           }
-        }
-         
-          
     }
 
     public void setO2FreezeCount(float o2FreezeCount)
@@ -187,7 +136,6 @@ public class Script_Player : MonoBehaviour
         {
             PO2.setDecreasingO2(false);
             o2FreezeCount -= Time.deltaTime;
-            
         }
         if(o2FreezeCount <= 0) 
         {
@@ -202,7 +150,6 @@ public class Script_Player : MonoBehaviour
             invulneravel = true;
             rig.AddForce(new Vector2(rig.velocity.x, 10f),ForceMode2D.Impulse);
             impulseCount -= Time.deltaTime;
-            
         }else if(impulseCount <= 0)
         {
             invulneravel = false;
