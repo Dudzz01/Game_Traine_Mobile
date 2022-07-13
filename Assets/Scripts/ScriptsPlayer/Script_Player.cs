@@ -14,10 +14,13 @@ public class Script_Player : MonoBehaviour
     private float o2FreezeCount;
     private bool jump; // Variavel que possibilita o jump
     private bool isAlive; // Variavel que define se o player está vivo ou morto
-    
     private PlayerO2 PO2;
-
     public bool active_pwp;
+    public bool canImpulse;
+    public float impulseTimer, impulseCount;
+    public float invulnerabilidadeCount;
+
+    public bool invulneravel;
     
    
     
@@ -25,11 +28,14 @@ public class Script_Player : MonoBehaviour
     // Start executa o que esta dentro dele através da inicializacao do objeto
     void Start()
     {
+        impulseTimer = 0.5f;
         active_pwp = false;
+        canImpulse = false;
         speed_h = 1000;
         speed_v = 25; //Velocidade Vertical do player
         isAlive = true; // Player está vivo
         PO2 = gameObject.GetComponent<PlayerO2>();//Acessando o script do oxigênio, e todas as suas variaveis e metodos publicos
+        invulneravel = false;
     }
         
     // Update executa o que esta dentro dele a todo instante to jogo
@@ -74,7 +80,7 @@ public class Script_Player : MonoBehaviour
       }
 
           Movement();
-        
+        impulso();
       
     }
 
@@ -105,7 +111,10 @@ public class Script_Player : MonoBehaviour
 
          if(collision.gameObject.tag == "Enemy"|| collision.gameObject.tag == "EnemyBullet")
          {
-             isAlive = false; // mata o jogador
+             if(!invulneravel)
+             {
+                isAlive = false; // mata o jogador
+             }
          }
 
        }
@@ -113,7 +122,10 @@ public class Script_Player : MonoBehaviour
        {
            if(collision.gameObject.tag == "Enemy"|| collision.gameObject.tag == "EnemyBullet")
            {
-             isAlive = true; // mata o jogador
+              if(!invulneravel)
+             {
+                isAlive = false; // mata o jogador
+             }
              Destroy(collision.gameObject);
            }
        }
@@ -143,14 +155,20 @@ public class Script_Player : MonoBehaviour
 
           if(col.gameObject.tag == "Enemy" || col.gameObject.tag == "EnemyBullet")
           {
-              isAlive = false; // mata o jogador
+               if(!invulneravel)
+             {
+                isAlive = false; // mata o jogador
+             }
           }
        }
         else
         {
            if(col.gameObject.tag == "Enemy"|| col.gameObject.tag == "EnemyBullet")
            {
-             isAlive = true; // mata o jogador
+              if(!invulneravel)
+             {
+                isAlive = false; // mata o jogador
+             }
              Destroy(col.gameObject);
            }
         }
@@ -169,16 +187,30 @@ public class Script_Player : MonoBehaviour
         {
             PO2.setDecreasingO2(false);
             o2FreezeCount -= Time.deltaTime;
-            isAlive = true;
+            
         }
         if(o2FreezeCount <= 0) 
         {
             PO2.setDecreasingO2(true);
         }
     }
-
+    void impulso()
+    {
+        if(impulseCount > 0)
+        {   
+            this.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+            invulneravel = true;
+            rig.AddForce(new Vector2(rig.velocity.x, 10f),ForceMode2D.Impulse);
+            impulseCount -= Time.deltaTime;
+            
+        }else if(impulseCount <= 0)
+        {
+            invulneravel = false;
+            this.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        }
+    }
    
-    
+
    
 
    
