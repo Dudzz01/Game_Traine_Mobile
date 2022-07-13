@@ -34,8 +34,9 @@ public class Script_Player : MonoBehaviour
       right.transform.position = new Vector3(right.transform.position.x,this.gameObject.transform.position.y,right.transform.position.z);
       left.transform.position = new Vector3(left.transform.position.x,this.gameObject.transform.position.y,left.transform.position.z);
       freezeO2();
+      Script_GameController.instance.Score(transform);
       
-      if(isAlive == false)
+      if (isAlive == false)
       {
         Destroy(this.gameObject); // Player é destruido
       }
