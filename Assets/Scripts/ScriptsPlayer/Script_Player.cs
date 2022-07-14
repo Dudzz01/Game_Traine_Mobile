@@ -27,7 +27,7 @@ public class Script_Player : MonoBehaviour
     // Start executa o que esta dentro dele através da inicializacao do objeto
     void Start()
     {
-        impulseTimer = 0.5f;
+        impulseTimer = 1.5f;
         canImpulse = false;
         speed_h = 1000;
         speed_v = 25; //Velocidade Vertical do player
@@ -148,7 +148,7 @@ public class Script_Player : MonoBehaviour
         {   
             this.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
             invulneravel = true;
-            rig.AddForce(new Vector2(rig.velocity.x, 10f),ForceMode2D.Impulse);
+            rig.AddForce(new Vector2(rig.velocity.x, 30f),ForceMode2D.Impulse);
             impulseCount -= Time.deltaTime;
         }else if(impulseCount <= 0)
         {

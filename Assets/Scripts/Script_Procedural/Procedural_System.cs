@@ -27,7 +27,7 @@ public class Procedural_System : MonoBehaviour
          //Destroy(collision.gameObject);
          if(collision.gameObject.name.StartsWith("Plataform") || collision.gameObject.name.StartsWith("Plataform2") || collision.gameObject.name.StartsWith("Plataforma3"))
          {
-          collision.gameObject.transform.position = new Vector2(Random.Range(-8f,8f), pos_y );
+          collision.gameObject.transform.position = new Vector2(Random.Range(-8f,8f), pos_y-1 );
           Debug.Log(pos_y);
          }
          else if(collision.gameObject.name.StartsWith("ground"))
