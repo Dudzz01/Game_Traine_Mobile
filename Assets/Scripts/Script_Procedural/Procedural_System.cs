@@ -55,6 +55,9 @@ public class Procedural_System : MonoBehaviour
             case "CapsuleO2":
             Destroy(collision.gameObject);
             break;
+            case "Player":
+            Script_GameController.instance.StartCoroutine("GameOver");
+            break;
             default:
             Debug.Log("Objeto nao encontrado para destruir");
             break;

@@ -55,6 +55,7 @@ public class Script_Player : MonoBehaviour
 
         if (PO2.getGameOver() == true)//Se deu game over
         {
+            Script_GameController.instance.StartCoroutine("GameOver");
             Destroy(this.gameObject);
         }
         if(rig.velocity.y >26) // Condicao para que o player consiga no maximo pular com 20 de velocidade( nao consegue ter uma velocidade maior que isso em seu pulo, utilizei esse codigo para corrigir um bug)
@@ -89,6 +90,7 @@ public class Script_Player : MonoBehaviour
          {
              if(!invulneravel)
              {
+                Script_GameController.instance.StartCoroutine("GameOver");
                 isAlive = false; // mata o jogador
              }
              if(invulneravel)
@@ -116,6 +118,7 @@ public class Script_Player : MonoBehaviour
           {
             if(!invulneravel)
              {
+                Script_GameController.instance.StartCoroutine("GameOver");
                 isAlive = false; // mata o jogador
              }
             if(invulneravel)
@@ -123,6 +126,12 @@ public class Script_Player : MonoBehaviour
                 Destroy(col.gameObject);
             }
           }
+        if (col.CompareTag("HighScore"))
+        {
+            //Efeito Sonoro feliz
+            Destroy(col.gameObject);
+        }
+          
     }
 
     public void setO2FreezeCount(float o2FreezeCount)

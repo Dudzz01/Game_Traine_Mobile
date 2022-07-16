@@ -12,6 +12,7 @@ TagManager:
   - CapsuleO2
   - O2FreezePowerUp
   - ImpulsePowerUp
+  - HighScore
   layers:
   - Default
   - TransparentFX
