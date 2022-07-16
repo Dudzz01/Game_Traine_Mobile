@@ -28,7 +28,8 @@ public class Procedural_System : MonoBehaviour
             if(collision.gameObject.name.StartsWith("Plataform") || collision.gameObject.name.StartsWith("Plataform2") || collision.gameObject.name.StartsWith("Plataforma3"))
             {
                 collision.gameObject.transform.position = new Vector2(Random.Range(-8f,8f), pos_y-1 );
-                gameObject.GetComponent<Spawner_PUp>().CreatePower(collision.gameObject.transform);
+                gameObject.GetComponent<Spawner_PUp>().CreatePower(collision.gameObject.transform); // Spawner de powerup
+                gameObject.GetComponent<Spawner_Enemy>().CreateEnemy(collision.gameObject.transform);
                 Debug.Log(pos_y);
             }
             else if(collision.gameObject.name.StartsWith("ground"))
@@ -36,6 +37,28 @@ public class Procedural_System : MonoBehaviour
                 Destroy(collision.gameObject);
             }
         }
+
+         switch(collision.gameObject.tag)
+         {
+            case "O2FreezePowerUp": 
+            Destroy(collision.gameObject);
+            break;
+            case "Enemy":  
+             Destroy(collision.gameObject);
+            break;
+            case "EnemyBullet":
+            Destroy(collision.gameObject);
+            break;
+            case "ImpulsePowerUp":
+            Destroy(collision.gameObject);
+            break;
+            case "CapsuleO2":
+            Destroy(collision.gameObject);
+            break;
+            default:
+            Debug.Log("Objeto nao encontrado para destruir");
+            break;
+         }
       
     }
 }

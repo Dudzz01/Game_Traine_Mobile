@@ -5,9 +5,14 @@ using UnityEngine;
 public class Enemy_Dinamic : MonoBehaviour
 {
     private float speed;
+    private float contador;
+    private bool verify_col; // verificando colissao e limitando movimentacao do enemy ao ocorrer isso
+    
+    
     void Start()
     {
-        speed = 5f;
+        verify_col = false;
+        this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-5,0);
     }
 
     
@@ -18,25 +23,58 @@ public class Enemy_Dinamic : MonoBehaviour
 
     void FixedUpdate() 
     {
-
+       if(verify_col == false)
+       {
        MovimentEnemy();
+       }
+       if(verify_col == true)
+       {
+           contadorTempVelY();
+       }
 
     }
     void OnTriggerEnter2D(Collider2D col) 
     {
-        if (col.CompareTag("RightBorder"))
+
+        if(col.CompareTag("Ground"))
         {
-            speed = -5f;
-        }
-        if (col.CompareTag("LeftBorder"))
-        {
-            speed = 5f;
+            verify_col = true;
+            
+            
+            
+           if(verify_col == true)
+           {
+                this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 3);
+           }
+           
         }
     }
 
     void MovimentEnemy()
     {
-      transform.position = new Vector3(transform.position.x + speed * Time.deltaTime, transform.position.y); // Movimentacao
+      
+         if(transform.position.x <= -8)
+         {
+             this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(5,0);
+         }
+         else if(transform.position.x >= 7)
+         {
+            this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-5,0);
+         }
+         
     }
+
+    void contadorTempVelY()
+    {
+           contador+=Time.deltaTime;
+
+           if(contador>1)
+           {
+            this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-5,0);
+            contador = 0;
+            verify_col = false;
+           }
+    }
+    
     
 }

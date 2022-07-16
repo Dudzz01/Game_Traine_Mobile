@@ -32,7 +32,7 @@ public class Spawner_PUp : MonoBehaviour
         {
             int PowerToCreate = Random.Range(0, ActualPowers.Count);//Sorteio do index do power up a ser instanciado
             Instantiate(ActualPowers[PowerToCreate], PlatPos.position + Vector3.up * Y_Factor, PlatPos.rotation); 
-            //Criação de um power up na posicao da plataforma "PlatToCreate-esima" + um pouco pra cima
+            //Criaï¿½ï¿½o de um power up na posicao da plataforma "PlatToCreate-esima" + um pouco pra cima
             ActualPowers.Remove(ActualPowers[PowerToCreate]);//Remocao do power up instanciado, para evitar repeticoes
             if(ActualPowers.Count == 0)//Se a lista dos power ups zerar...
             {
