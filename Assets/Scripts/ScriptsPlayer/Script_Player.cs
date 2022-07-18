@@ -183,7 +183,7 @@ public class Script_Player : MonoBehaviour
     {    // se a moeda for pega...
         if(enable_pick == true)
         {
-         vel_limit = 30; // o limitador da velocidade do player aumenta
+         vel_limit = 33; // o limitador da velocidade do player aumenta
          if(rig.velocity.y <0) // se no momento em que o player pega a moeda, ele estiver indo para baixo, ou seja, a velocidade dele é negativa
          {
             rig.AddForce(new Vector2(rig.velocity.x, (rig.velocity.y*-1f)+speed_v),ForceMode2D.Impulse); // fazemos uma conta aritmetica que basicamente anula a velocidade dele negativa com a positiva, e adicionando a forca que ele quer q va para cima( o speed v)
