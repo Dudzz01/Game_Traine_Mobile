@@ -11,16 +11,19 @@ public class Script_Player : MonoBehaviour
     public Rigidbody2D rig; // RigidBody2D do player
     private float speed_v; // Velocidade Vertical do player
     private float speed_h; // Velocidade Horizontal do player
-    private float o2FreezeCount;
+    private float o2FreezeCount; // sistema powerup travaO2
     private bool jump; // Variavel que possibilita o jump
     private bool isAlive; // Variavel que define se o player está vivo ou morto
     private PlayerO2 PO2;
-    public bool canImpulse;
-    public float impulseTimer, impulseCount;
-    public float invulnerabilidadeCount;
+    public bool canImpulse; // sistema powerup impulse
+    public float impulseTimer, impulseCount;  // sistema powerup impulse
+    public float invulnerabilidadeCount;  // sistema powerup impulse
 
-    public bool invulneravel;
+    public bool invulneravel;  // sistema powerup impulse
     
+    private float vel_limit; // limite da velocidade vertical do player
+
+    private bool enable_pick;
    
     
 
@@ -30,15 +33,18 @@ public class Script_Player : MonoBehaviour
         impulseTimer = 1.5f;
         canImpulse = false;
         speed_h = 1000;
-        speed_v = 25; //Velocidade Vertical do player
+        speed_v = 26; //Velocidade Vertical do player
         isAlive = true; // Player está vivo
         PO2 = gameObject.GetComponent<PlayerO2>();//Acessando o script do oxigênio, e todas as suas variaveis e metodos publicos
         invulneravel = false;
+        vel_limit = 26; // padrao normal da velocidade do player
+        enable_pick = false;
     }
         
     // Update executa o que esta dentro dele a todo instante to jogo
     void Update()
     {
+      Debug.Log(rig.velocity.y);
       right.transform.position = new Vector3(right.transform.position.x,this.gameObject.transform.position.y,right.transform.position.z);
       left.transform.position = new Vector3(left.transform.position.x,this.gameObject.transform.position.y,left.transform.position.z);
       freezeO2();
@@ -58,17 +64,18 @@ public class Script_Player : MonoBehaviour
             Script_GameController.instance.StartCoroutine("GameOver");
             Destroy(this.gameObject);
         }
-        if(rig.velocity.y >26) // Condicao para que o player consiga no maximo pular com 20 de velocidade( nao consegue ter uma velocidade maior que isso em seu pulo, utilizei esse codigo para corrigir um bug)
+        if(rig.velocity.y >vel_limit && enable_pick == false) // Condicao para que o player consiga no maximo pular com 20 de velocidade( nao consegue ter uma velocidade maior que isso em seu pulo, utilizei esse codigo para corrigir um bug)
         {
-            rig.velocity = new Vector2(0,22); // Caso o player ultrapasse a velocidade 20, a velocidade dele vertical fica 16
+            rig.velocity = new Vector2(0,vel_limit-4); // Caso o player ultrapasse a velocidade 20, a velocidade dele vertical fica 16
         }
-        if(jump == true && rig.velocity.y <= 26)
+        if(jump == true && rig.velocity.y <= vel_limit)
         {
             rig.AddForce(new Vector2(0,speed_v), ForceMode2D.Impulse);
             jump = false;
         }
         Movement();
         impulso();
+        pickCoin();
     }
 
     public void Movement()//Input.acceleration é a classe responsável pelo acelerometro. Ao chamar .x, ela usa apenas esse eixo para a movimentação do player
@@ -151,6 +158,7 @@ public class Script_Player : MonoBehaviour
             PO2.setDecreasingO2(true);
         }
     }
+    // impulso powerup
     void impulso()
     {
         if(impulseCount > 0)
@@ -163,6 +171,31 @@ public class Script_Player : MonoBehaviour
         {
             invulneravel = false;
             this.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        }
+    }
+
+    public void setEnablePickCoin(bool enable_pick) // metodo setter que seta o valor da permissao de pegar a moeda
+    {
+        this.enable_pick = enable_pick;
+    }
+
+    public void pickCoin()
+    {    // se a moeda for pega...
+        if(enable_pick == true)
+        {
+         vel_limit = 30; // o limitador da velocidade do player aumenta
+         if(rig.velocity.y <0) // se no momento em que o player pega a moeda, ele estiver indo para baixo, ou seja, a velocidade dele é negativa
+         {
+            rig.AddForce(new Vector2(rig.velocity.x, (rig.velocity.y*-1f)+speed_v),ForceMode2D.Impulse); // fazemos uma conta aritmetica que basicamente anula a velocidade dele negativa com a positiva, e adicionando a forca que ele quer q va para cima( o speed v)
+            Debug.Log("Pego moeda");
+            enable_pick = false; // desabilita a colisao
+         }
+         else
+         {
+           rig.AddForce(new Vector2(rig.velocity.x, rig.velocity.y+speed_v),ForceMode2D.Impulse); // da o impulso para cima ao pegar a moeda
+           Debug.Log("Pego moeda");
+           enable_pick = false; // desabilita a colisao
+         }
         }
     }
    
