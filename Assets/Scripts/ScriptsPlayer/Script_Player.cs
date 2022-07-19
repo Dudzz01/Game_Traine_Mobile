@@ -21,6 +21,11 @@ public class Script_Player : MonoBehaviour
 
     public bool invulneravel;  // sistema powerup impulse
     
+    private bool impulsing; // o player esta impulsionando( por conta do powerup)
+
+    private bool freezing; // o player esta congeland (por conta do powerup)
+
+   
     private float vel_limit; // limite da velocidade vertical do player
 
     private bool enable_pick;
@@ -49,7 +54,7 @@ public class Script_Player : MonoBehaviour
       //Debug.Log(rig.velocity.y);
       right.transform.position = new Vector3(right.transform.position.x,this.gameObject.transform.position.y,right.transform.position.z);
       left.transform.position = new Vector3(left.transform.position.x,this.gameObject.transform.position.y,left.transform.position.z);
-      freezeO2();
+      
       Script_GameController.instance.Score(transform);
       
       if (isAlive == false)
@@ -77,6 +82,7 @@ public class Script_Player : MonoBehaviour
             jump = false;
         }
         Movement();
+        freezeO2();
         impulso();
         pickCoin();
     }
@@ -98,12 +104,13 @@ public class Script_Player : MonoBehaviour
 
          if(collision.gameObject.tag == "Enemy"|| collision.gameObject.tag == "EnemyBullet")
          {
-             if(!invulneravel)
+            
+             if(!invulneravel )
              {
                 Script_GameController.instance.StartCoroutine("GameOver");
                 isAlive = false; // mata o jogador
              }
-             if(invulneravel)
+             if(invulneravel )
              {
                 Destroy(collision.gameObject);
              }
@@ -126,6 +133,7 @@ public class Script_Player : MonoBehaviour
         //Obs.: Precisei desativar a cinemachine pois a cam estava seguindo o player também no eixo x, e assim, a logica não funcionava
           if(col.gameObject.tag == "Enemy" || col.gameObject.tag == "EnemyBullet")
           {
+             
             if(!invulneravel)
              {
                 Script_GameController.instance.StartCoroutine("GameOver");
@@ -133,6 +141,7 @@ public class Script_Player : MonoBehaviour
              }
             if(invulneravel)
             {
+                isAlive = true;
                 Destroy(col.gameObject);
             }
           }
@@ -155,11 +164,48 @@ public class Script_Player : MonoBehaviour
         if (o2FreezeCount > 0) 
         {
             PO2.setDecreasingO2(false);
+            
+            
+            invulneravel = true;
+            
             o2FreezeCount -= Time.deltaTime;
         }
-        if(o2FreezeCount <= 0) 
+        else if(o2FreezeCount <= 0) 
         {
             PO2.setDecreasingO2(true);
+            if(getImpulsing() == false)
+            {
+               
+            
+            invulneravel = false;
+            setFreezing(false);
+            }
+            else if(getImpulsing() == true && getFreezing() == false)
+            {
+                
+            }
+            else if(getFreezing() == true && getImpulsing() == true)
+            {
+                 setFreezing(false);
+            }
+            else if(getImpulsing() == false && getFreezing() == true)
+            {
+                
+                
+                invulneravel = false;
+                setFreezing(false);
+            }
+            else if(getFreezing() == false && getImpulsing() == false)
+            {
+                
+                invulneravel = false;
+               
+            }
+            else if(getFreezing() == true)
+            {
+                invulneravel = false;
+                setFreezing(false);
+            }
         }
     }
     // impulso powerup
@@ -169,12 +215,48 @@ public class Script_Player : MonoBehaviour
         {   
             this.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
             invulneravel = true;
+           
             rig.AddForce(new Vector2(rig.velocity.x, 30f),ForceMode2D.Impulse);
             impulseCount -= Time.deltaTime;
-        }else if(impulseCount <= 0)
+        }
+        else if(impulseCount <= 0)
         {
+            if(getFreezing() == false)
+            {
+                //se nao esta ocorrendo o uso do powerup de congelamento de o2
+            
             invulneravel = false;
             this.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+            setImpulsing(false);
+            }
+            else if(getFreezing() == true && getImpulsing() == false)
+            {
+                //se esta ocorrendo o uso de powerup de congelamento de O2 e nao esta ocorrendo o o powerup de impulso
+            }
+            else if(getFreezing() == true && getImpulsing() == true)
+            {
+                setImpulsing(false);
+            }
+            else if(getFreezing() == false && getImpulsing() == true)
+            {
+                //se nao esta ocorrendo o uso de powerup de congelamento de O2 e esta ocorrendo o o powerup de impulso
+                
+                invulneravel = false;
+                this.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                setImpulsing(false);
+            }
+            else if(getFreezing() == false && getImpulsing() == false)
+            {
+                 Debug.Log("ta chamand liks");
+                 invulneravel = false;
+                 
+            }
+            else if(getImpulsing() == true)
+            {
+                 invulneravel = false;
+                this.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                setImpulsing(false);
+            }
         }
     }
 
@@ -203,13 +285,23 @@ public class Script_Player : MonoBehaviour
          }
         }
     }
-   
 
-   
+    public void setFreezing(bool freezing){
+        this.freezing = freezing;
+    }
 
-   
+    public bool getFreezing()
+    {
+        return this.freezing;
+    }
 
-  
-    
+    public void setImpulsing(bool impulsing){
+        this.impulsing = impulsing;
+    }
+
+    public bool getImpulsing()
+    {
+        return this.impulsing;
+    }    
 
 }

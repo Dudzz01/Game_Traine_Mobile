@@ -17,6 +17,7 @@ public class ImpulsoPowerUp : MonoBehaviour
         if(col.CompareTag("Player"))
         {
             player.GetComponent<Script_Player>().impulseCount = player.GetComponent<Script_Player>().impulseTimer;
+            player.GetComponent<Script_Player>().setImpulsing(true);
             Destroy(this.gameObject);
         }
     }
