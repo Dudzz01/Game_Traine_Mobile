@@ -33,13 +33,17 @@ public class Spawner_PUp : MonoBehaviour
             int PowerToCreate = Random.Range(0, ActualPowers.Count);//Sorteio do index do power up a ser instanciado
             Instantiate(ActualPowers[PowerToCreate], PlatPos.position + Vector3.up * Y_Factor, PlatPos.rotation); 
             //Cria��o de um power up na posicao da plataforma "PlatToCreate-esima" + um pouco pra cima
+            
+            CurrentPlat = 0;
+            if (ActualPowers[PowerToCreate].CompareTag("ImpulsePowerUp"))//So pra balancear, se o power up for o do impulso, PlatToCreate
+                PlatToCreate = Random.Range(18, 26);//Sera "mais distante", pra evitar que o player ultrapasse outros power ups 
+            else
+                PlatToCreate = Random.Range(5, 10);
             ActualPowers.Remove(ActualPowers[PowerToCreate]);//Remocao do power up instanciado, para evitar repeticoes
-            if(ActualPowers.Count == 0)//Se a lista dos power ups zerar...
+            if (ActualPowers.Count == 0)//Se a lista dos power ups zerar...
             {
                 ReferenceAllPowerUps();//...E so referenciar os mesmos valores de novo, e o ciclo continua
             }
-            CurrentPlat = 0;
-            PlatToCreate = Random.Range(5, 10);
         }
     }
 }

@@ -11,6 +11,8 @@ public class Script_GameController : MonoBehaviour
     [SerializeField] private Text ScoreTxt;
     [SerializeField] private Animator GamOvAnim;
     [SerializeField] private GameObject HighLine;
+    private AudioSource AS;
+    [SerializeField] private AudioClip GameOverClip;
 
     private float ActualScore;
 
@@ -39,12 +41,13 @@ public class Script_GameController : MonoBehaviour
         {
             Instantiate(HighLine, HighLine.transform.position * PlayerPrefs.GetFloat("HighScore"), HighLine.transform.rotation);
         }
+        AS = gameObject.GetComponent<AudioSource>();
     }
     public IEnumerator GameOver()
     {
         GamOvAnim.SetTrigger("die");
         Debug.Log("Morreu");
-        //Som de GameOver
+        AS.PlayOneShot(GameOverClip);
         yield return new WaitForSeconds(3f);
         if(!PlayerPrefs.HasKey("HighScore") || ActualScore > PlayerPrefs.GetFloat("HighScore"))
             PlayerPrefs.SetFloat("HighScore", ActualScore);

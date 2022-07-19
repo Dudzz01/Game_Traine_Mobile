@@ -24,8 +24,10 @@ public class Script_Player : MonoBehaviour
     private float vel_limit; // limite da velocidade vertical do player
 
     private bool enable_pick;
-   
-    
+    [SerializeField] private AudioClip JumpClip;
+    [SerializeField] private AudioClip CoinClip;
+    [SerializeField] private AudioClip HighScoreClip;
+    [SerializeField] private AudioClip PowerUpClip;
 
     // Start executa o que esta dentro dele através da inicializacao do objeto
     void Start()
@@ -44,7 +46,7 @@ public class Script_Player : MonoBehaviour
     // Update executa o que esta dentro dele a todo instante to jogo
     void Update()
     {
-      Debug.Log(rig.velocity.y);
+      //Debug.Log(rig.velocity.y);
       right.transform.position = new Vector3(right.transform.position.x,this.gameObject.transform.position.y,right.transform.position.z);
       left.transform.position = new Vector3(left.transform.position.x,this.gameObject.transform.position.y,left.transform.position.z);
       freezeO2();
@@ -55,7 +57,7 @@ public class Script_Player : MonoBehaviour
         Destroy(this.gameObject); // Player é destruido
       } 
     }
-
+    
     void FixedUpdate() 
     {
 
@@ -70,6 +72,7 @@ public class Script_Player : MonoBehaviour
         }
         if(jump == true && rig.velocity.y <= vel_limit)
         {
+            PO2.PlaySound(JumpClip);
             rig.AddForce(new Vector2(0,speed_v), ForceMode2D.Impulse);
             jump = false;
         }
@@ -135,10 +138,11 @@ public class Script_Player : MonoBehaviour
           }
         if (col.CompareTag("HighScore"))
         {
-            //Efeito Sonoro feliz
+            PO2.PlaySound(HighScoreClip);
             Destroy(col.gameObject);
         }
-          
+        if (col.CompareTag("ImpulsePowerUp") || col.CompareTag("O2FreezePowerUp"))
+            PO2.PlaySound(PowerUpClip);        
     }
 
     public void setO2FreezeCount(float o2FreezeCount)
@@ -183,7 +187,8 @@ public class Script_Player : MonoBehaviour
     {    // se a moeda for pega...
         if(enable_pick == true)
         {
-         vel_limit = 33; // o limitador da velocidade do player aumenta
+            PO2.PlaySound(CoinClip);
+            vel_limit = 33; // o limitador da velocidade do player aumenta
          if(rig.velocity.y <0) // se no momento em que o player pega a moeda, ele estiver indo para baixo, ou seja, a velocidade dele é negativa
          {
             rig.AddForce(new Vector2(rig.velocity.x, (rig.velocity.y*-1f)+speed_v),ForceMode2D.Impulse); // fazemos uma conta aritmetica que basicamente anula a velocidade dele negativa com a positiva, e adicionando a forca que ele quer q va para cima( o speed v)
