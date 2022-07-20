@@ -24,17 +24,4 @@ public class Pause_Menu : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(sceneID);
     }
-    /*
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    */
 }

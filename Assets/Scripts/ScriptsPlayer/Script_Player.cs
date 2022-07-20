@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Script_Player : MonoBehaviour
 {
-    
-    
+
     public GameObject right;
     public GameObject left;
     public Rigidbody2D rig; // RigidBody2D do player
@@ -25,7 +24,6 @@ public class Script_Player : MonoBehaviour
 
     private bool freezing; // o player esta congeland (por conta do powerup)
 
-   
     private float vel_limit; // limite da velocidade vertical do player
 
     private bool enable_pick;
@@ -104,7 +102,6 @@ public class Script_Player : MonoBehaviour
 
          if(collision.gameObject.tag == "Enemy"|| collision.gameObject.tag == "EnemyBullet")
          {
-            
              if(!invulneravel )
              {
                 Script_GameController.instance.StartCoroutine("GameOver");
@@ -165,7 +162,6 @@ public class Script_Player : MonoBehaviour
         {
             PO2.setDecreasingO2(false);
             
-            
             invulneravel = true;
             
             o2FreezeCount -= Time.deltaTime;
@@ -173,10 +169,9 @@ public class Script_Player : MonoBehaviour
         else if(o2FreezeCount <= 0) 
         {
             PO2.setDecreasingO2(true);
+            
             if(getImpulsing() == false)
             {
-               
-            
             invulneravel = false;
             setFreezing(false);
             }
@@ -190,16 +185,12 @@ public class Script_Player : MonoBehaviour
             }
             else if(getImpulsing() == false && getFreezing() == true)
             {
-                
-                
                 invulneravel = false;
                 setFreezing(false);
             }
             else if(getFreezing() == false && getImpulsing() == false)
             {
-                
                 invulneravel = false;
-               
             }
             else if(getFreezing() == true)
             {
@@ -208,8 +199,8 @@ public class Script_Player : MonoBehaviour
             }
         }
     }
-    // impulso powerup
-    void impulso()
+
+    void impulso() // impulso powerup
     {
         if(impulseCount > 0)
         {   
@@ -303,5 +294,4 @@ public class Script_Player : MonoBehaviour
     {
         return this.impulsing;
     }    
-
 }
