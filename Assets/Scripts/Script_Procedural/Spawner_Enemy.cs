@@ -31,7 +31,7 @@ public class Spawner_Enemy : MonoBehaviour
         if (CurrentPlat >= PlatToCreate)
         {
             int EnemyToCreate = Random.Range(0, ActualEnemies.Count);//Sorteio do index do power up a ser instanciado
-            Instantiate(ActualEnemies[EnemyToCreate], new Vector3(Random.Range(-6.8f,6.8f),PlatPos.position.y + 30, PlatPos.position.z), PlatPos.rotation); 
+            Instantiate(ActualEnemies[EnemyToCreate], new Vector3(Random.Range(-6.8f,6.8f),PlatPos.position.y + 15, PlatPos.position.z), PlatPos.rotation); 
             CurrentPlat = 0;
             PlatToCreate = Random.Range(5, 10);
         }

@@ -51,7 +51,7 @@ public class Enemy_Static : MonoBehaviour
 
              if(verify_col == true)
              {
-             this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 15);
+             this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 10);
              }
         }
     }
@@ -61,7 +61,7 @@ public class Enemy_Static : MonoBehaviour
     {
            contador+=Time.deltaTime;
 
-           if(contador>1)
+           if(contador>0.5f)
            {
             this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
             contador = 0;
