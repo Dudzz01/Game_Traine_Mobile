@@ -38,11 +38,11 @@ public class Script_Player : MonoBehaviour
         impulseTimer = 1.5f;
         canImpulse = false;
         speed_h = 1000;
-        speed_v = 26; //Velocidade Vertical do player
+        speed_v = 28; //Velocidade Vertical do player
         isAlive = true; // Player está vivo
         PO2 = gameObject.GetComponent<PlayerO2>();//Acessando o script do oxigênio, e todas as suas variaveis e metodos publicos
         invulneravel = false;
-        vel_limit = 26; // padrao normal da velocidade do player
+        vel_limit = 32; // padrao normal da velocidade do player
         enable_pick = false;
     }
         
@@ -82,7 +82,11 @@ public class Script_Player : MonoBehaviour
         Movement();
         freezeO2();
         impulso();
+        if(enable_pick == true)
+        {
         pickCoin();
+        enable_pick = false;
+        }
     }
 
     public void Movement()//Input.acceleration é a classe responsável pelo acelerometro. Ao chamar .x, ela usa apenas esse eixo para a movimentação do player
@@ -258,23 +262,22 @@ public class Script_Player : MonoBehaviour
 
     public void pickCoin()
     {    // se a moeda for pega...
-        if(enable_pick == true)
-        {
+        
             PO2.PlaySound(CoinClip);
-            vel_limit = 33; // o limitador da velocidade do player aumenta
+            vel_limit = 40f; // o limitador da velocidade do player aumenta
          if(rig.velocity.y <0) // se no momento em que o player pega a moeda, ele estiver indo para baixo, ou seja, a velocidade dele é negativa
          {
-            rig.AddForce(new Vector2(rig.velocity.x, (rig.velocity.y*-1f)+speed_v),ForceMode2D.Impulse); // fazemos uma conta aritmetica que basicamente anula a velocidade dele negativa com a positiva, e adicionando a forca que ele quer q va para cima( o speed v)
+            rig.AddForce(new Vector2(rig.velocity.x, (rig.velocity.y*-1)+25f),ForceMode2D.Impulse); // fazemos uma conta aritmetica que basicamente anula a velocidade dele negativa com a positiva, e adicionando a forca que ele quer q va para cima( o speed v)
             Debug.Log("Pego moeda");
-            enable_pick = false; // desabilita a colisao
+            
          }
          else
          {
-           rig.AddForce(new Vector2(rig.velocity.x, rig.velocity.y+speed_v),ForceMode2D.Impulse); // da o impulso para cima ao pegar a moeda
+           rig.AddForce(new Vector2(rig.velocity.x, 12f),ForceMode2D.Impulse); // da o impulso para cima ao pegar a moeda
            Debug.Log("Pego moeda");
-           enable_pick = false; // desabilita a colisao
+           
          }
-        }
+        
     }
 
     public void setFreezing(bool freezing){
