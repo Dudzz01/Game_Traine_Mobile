@@ -15,7 +15,7 @@ public class PlayerO2 : MonoBehaviour
     {
         CanDecreasing = true;
         GameOver = false;
-        MaxO2 = 15;
+        MaxO2 = 20;
         ActualO2 = MaxO2;
         AS = gameObject.GetComponent<AudioSource>();
     }
@@ -67,7 +67,7 @@ public class PlayerO2 : MonoBehaviour
         while(ActualO2 < MaxIncreased)
         {
             ActualO2 += 0.1f;
-            yield return new WaitForSeconds(0.0001f);//Para dar um efeito de "encher a barra", o oxig�nio atual ser� incrementado ap�s um curto periodo de tempo
+            yield return new WaitForSeconds(0.00001f);//Para dar um efeito de "encher a barra", o oxig�nio atual ser� incrementado ap�s um curto periodo de tempo
         }//Pense de forma descontruido em voc� encher um copo d'agua: a cada 0.1 segundos, voc� bota 1 ml de agua no copo, por exemplo
         CanDecreasing = true;
     }

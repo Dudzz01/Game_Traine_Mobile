@@ -45,12 +45,18 @@ public class Script_GameController : MonoBehaviour
     }
     public IEnumerator GameOver()
     {
-        GamOvAnim.SetTrigger("die");
+        GamOvAnim.SetTrigger("die");//Chamo animacao de game over
         Debug.Log("Morreu");
         AS.PlayOneShot(GameOverClip);
-        yield return new WaitForSeconds(3f);
-        if(!PlayerPrefs.HasKey("HighScore") || ActualScore > PlayerPrefs.GetFloat("HighScore"))
-            PlayerPrefs.SetFloat("HighScore", ActualScore);
-        SceneManager.LoadScene(0);
+        if (!PlayerPrefs.HasKey("HighScore") || ActualScore > PlayerPrefs.GetFloat("HighScore"))//PlayerPrefs sao variaveis especiais da Unity
+            PlayerPrefs.SetFloat("HighScore", ActualScore);//Que diferente das normais, nao perdem suas informacoes entre cenas
+        yield return new WaitForSeconds(2f); //2 segundos e o tempo da animacao     
+        Time.timeScale = 0;//apos a anim, pauso o jogo para que nao fique tocando nenhum efeito sonoro
+    }
+
+    public void ToScene(int index)
+    {
+        SceneManager.LoadScene(index);
+        Time.timeScale = 1;
     }
 }

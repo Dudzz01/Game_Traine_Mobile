@@ -30,7 +30,7 @@ public class Procedural_System : MonoBehaviour
                 collision.gameObject.transform.position = new Vector2(Random.Range(-8f,8f), pos_y-1 );
                 gameObject.GetComponent<Spawner_PUp>().CreatePower(collision.gameObject.transform); // Spawner de powerup
                 gameObject.GetComponent<Spawner_Enemy>().CreateEnemy(collision.gameObject.transform);
-                Debug.Log(pos_y);
+                //Debug.Log(pos_y);
             }
             else if(collision.gameObject.name.StartsWith("ground"))
             {
@@ -58,9 +58,9 @@ public class Procedural_System : MonoBehaviour
             case "Player":
             Script_GameController.instance.StartCoroutine("GameOver");
             break;
-            default:
-            Debug.Log("Objeto nao encontrado para destruir");
-            break;
+            //default:
+            //Debug.Log("Objeto nao encontrado para destruir");
+            //break;
          }
       
     }
