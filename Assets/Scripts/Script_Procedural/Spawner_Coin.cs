@@ -21,14 +21,17 @@ public class Spawner_Coin : MonoBehaviour
     private bool enable_spawn; // permitir spawn de moedas
 
     private bool enable_putCoinList; // permitir a adicao de moedas na lista
+
+    private float  cont = 0;
     
     void Start()
     {
+        cont = 0;
         enable_putCoinList = true;
         enable_spawn = false;
         timer_spawn = 0;
         state_spawn_coin = "Default";
-        random_pos_first_coin = Random.Range(-5,3);
+        random_pos_first_coin = Random.Range(-6.8f,3);
     }
 
     // Update is called once per frame
@@ -39,8 +42,7 @@ public class Spawner_Coin : MonoBehaviour
           putCoinInList();
           enable_putCoinList = false;
       }
-       
-
+             activeSpawn();
        if(enable_spawn == true)
        {
          createCoin("SquareForm");
@@ -50,21 +52,20 @@ public class Spawner_Coin : MonoBehaviour
 
     public void putCoinInList()
     {
-        
-     // se o contador for menor que 0.55, ele adicionará instancias de moedas em uma lista de moedas, essa adicao ocorre enquanto o contador for menor que meio segundo (0.55)
-       
           for(int j = 0; j<12; j++)
           {
                  listCoin.Add(coin);
           }
-          for(timer_spawn = 0; timer_spawn<3; timer_spawn+=Time.deltaTime)
-          {
-                    enable_spawn = false;
-          }
-       
-                    enable_spawn = true;
-        
+    }
 
+    public void activeSpawn()
+    {
+        cont+=Time.deltaTime; 
+        if(cont >= 10)
+        {
+           enable_spawn = true;
+           cont = 0;
+        }             
     }
 
     public void createCoin(string state_spawn)
@@ -78,8 +79,8 @@ public class Spawner_Coin : MonoBehaviour
                float[] pos_y = new float[4];
                int aux_x = 0;
                int aux_y = 0;
-               
-               
+               aux_pos_coin = 0;
+               aux_pos_coin_y = 0;
                foreach(GameObject coinss in listCoin)
                {
                  pos_x[0] = random_pos_first_coin+aux_pos_coin;
@@ -90,7 +91,6 @@ public class Spawner_Coin : MonoBehaviour
                  pos_y[2] = this.gameObject.transform.position.y+aux_pos_coin_y;
                  pos_y[3] = this.gameObject.transform.position.y+aux_pos_coin_y;
                  aux_pos_coin+=2;
-                 
                  ////////////////////////////////////////////////////
                  Instantiate(coinss,new Vector2(pos_x[aux_x],pos_y[aux_y]), Quaternion.identity);
 
@@ -108,19 +108,60 @@ public class Spawner_Coin : MonoBehaviour
                  }
 
                }
-              
-              listCoin.Clear();
-              
-              
-               
-                  
+                
           break;
 
           case "LineForm":
+                float[] pos_y2 = new float[12];
+                float[] pos_x2 = new float[1];
+                int aux_x2 = 0;
+                int aux_y2 = 0;
+                int count_aux = 0;
+                aux_pos_coin = 0;
+                aux_pos_coin_y = 0;
+                foreach(GameObject coinss in listCoin)
+                {
+                  count_aux++;
+                  pos_x2[0] = random_pos_first_coin+aux_pos_coin;
+                  pos_y2[aux_y2] = this.gameObject.transform.position.y+aux_pos_coin_y;
+                 
+                  ////////////////////////////////////////////////////
+                  Instantiate(coinss,new Vector2(pos_x2[aux_x2],pos_y2[aux_y2]), Quaternion.identity);
+                  aux_pos_coin_y+=3;
+                  aux_y2+=1;
+
+                  if(count_aux>=6)
+                  {
+                    break;
+                  }
+               }
           
           break;
 
           case "DiagonalForm":
+                float[] pos_y3 = new float[12];
+                float[] pos_x3 = new float[1];
+                int aux_x3 = 0;
+                int aux_y3 = 0;
+                int count_aux3 = 0;
+                aux_pos_coin = 0;
+                aux_pos_coin_y = 0;
+                foreach(GameObject coinss in listCoin)
+                {
+                  count_aux3++;
+                  pos_x3[aux_x3] = random_pos_first_coin+aux_pos_coin;
+                  pos_y3[aux_y3] = this.gameObject.transform.position.y+aux_pos_coin_y;
+                 
+                  ////////////////////////////////////////////////////
+                  Instantiate(coinss,new Vector2(pos_x3[aux_x3],pos_y3[aux_y3]), Quaternion.identity);
+                  aux_pos_coin_y+=3;
+                  aux_y3+=1;
+                  aux_pos_coin+=1;
+                  if(count_aux3>=6)
+                  {
+                    break;
+                  }
+               }
           
           break;
 
