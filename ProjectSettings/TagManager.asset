@@ -13,6 +13,7 @@ TagManager:
   - O2FreezePowerUp
   - ImpulsePowerUp
   - HighScore
+  - Coin
   layers:
   - Default
   - TransparentFX

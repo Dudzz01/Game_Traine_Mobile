@@ -22,8 +22,8 @@ public class Spawner_Coin : MonoBehaviour
 
     private bool enable_putCoinList; // permitir a adicao de moedas na lista
 
-    private float  cont = 0;
-    
+    private float  cont;  // contador do active spawn
+
     void Start()
     {
         cont = 0;
@@ -45,7 +45,7 @@ public class Spawner_Coin : MonoBehaviour
              activeSpawn();
        if(enable_spawn == true)
        {
-         createCoin("SquareForm");
+         createCoin(selectRandom());
          enable_spawn = false;
        }
     }
@@ -167,4 +167,34 @@ public class Spawner_Coin : MonoBehaviour
 
         }
     }
+
+    public string selectRandom()
+    {
+        int num_random = Random.Range(1,3);
+        
+        switch(num_random)
+        {
+          case 1:
+                this.state_spawn_coin = "SquareForm";
+          break;
+
+          case 2: 
+                this.state_spawn_coin = "LineForm";
+          break;
+
+          case 3: 
+                this.state_spawn_coin = "DiagonalForm";
+          break;
+
+          default:
+                 this.state_spawn_coin = "SquareForm";
+          break;
+        }
+        return this.state_spawn_coin;
+    }
+      
+    
+
+    
+
 }

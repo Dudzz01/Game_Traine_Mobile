@@ -129,7 +129,7 @@ public class Script_Player : MonoBehaviour
         }
         if (col.CompareTag("LeftBorder"))
         {
-            transform.position = new Vector3((transform.position.x * -1) - (float)0.3, transform.position.y, transform.position.z);
+            transform.position = new Vector3((transform.position.x * -1) - (float)0.5, transform.position.y, transform.position.z);
         }
         //Obs.: Precisei desativar a cinemachine pois a cam estava seguindo o player também no eixo x, e assim, a logica não funcionava
           if(col.gameObject.tag == "Enemy" || col.gameObject.tag == "EnemyBullet")
