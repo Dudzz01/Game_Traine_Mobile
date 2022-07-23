@@ -27,6 +27,12 @@ public class Script_Player : MonoBehaviour
     private float vel_limit; // limite da velocidade vertical do player
 
     private bool enable_pick;
+
+    private float fallValue;
+    private SpriteRenderer spriterenderer;
+    [SerializeField] private Sprite spritePulo;
+    [SerializeField] private Sprite spriteNormal;
+    [SerializeField] private float direcao;
     [SerializeField] private AudioClip JumpClip;
     [SerializeField] private AudioClip CoinClip;
     [SerializeField] private AudioClip HighScoreClip;
@@ -36,6 +42,7 @@ public class Script_Player : MonoBehaviour
     // Start executa o que esta dentro dele através da inicializacao do objeto
     void Start()
     {
+        fallValue = 1f;
         impulseTimer = 1.5f;
         canImpulse = false;
         speed_h = 1000;
@@ -45,11 +52,29 @@ public class Script_Player : MonoBehaviour
         invulneravel = false;
         vel_limit = 32; // padrao normal da velocidade do player
         enable_pick = false;
+        spriterenderer = gameObject.GetComponent<SpriteRenderer>();
     }
         
     // Update executa o que esta dentro dele a todo instante to jogo
     void Update()
     {
+        direcao = Input.acceleration.x;
+        if(direcao > 0)
+        {
+            this.transform.localScale = new Vector3(1, this.transform.localScale.y);
+        }else if (direcao < 0)
+        {
+            this.transform.localScale = new Vector3(-1, this.transform.localScale.y);
+        }
+
+        if(rig.velocity.y > fallValue)
+        {
+            spriterenderer.sprite = spritePulo;
+        }else
+        {
+            spriterenderer.sprite = spriteNormal;
+        }
+        
       //Debug.Log(rig.velocity.y);
       right.transform.position = new Vector3(right.transform.position.x,this.gameObject.transform.position.y,right.transform.position.z);
       left.transform.position = new Vector3(left.transform.position.x,this.gameObject.transform.position.y,left.transform.position.z);
@@ -99,10 +124,12 @@ public class Script_Player : MonoBehaviour
          if(collision.gameObject.tag == "Ground" && collision.gameObject.transform.position.y+1 < this.transform.position.y) // Se o player colidir com um objeto que tenha um colisor e tenha a etiqueta "Ground" e o y dele for maior que o y da plataforma que esta colidindo, executará um impulso
          {
             jump = true;
+        
          }
          else
          {
              jump = false;
+             
          }
 
          if(collision.gameObject.tag == "Enemy"|| collision.gameObject.tag == "EnemyBullet")
