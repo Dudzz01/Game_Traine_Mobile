@@ -27,7 +27,7 @@ public class BgmManager : MonoBehaviour
    IEnumerator StartLoop()
     {
         float TimeToWait = BgmIntro.length;
-        yield return new WaitForSeconds(TimeToWait - 1f);
+        yield return new WaitForSeconds(TimeToWait - 1.8f);
         AS.loop = true;
         AS.clip = BgmLoop;
         

@@ -31,6 +31,7 @@ public class Script_Player : MonoBehaviour
     [SerializeField] private AudioClip CoinClip;
     [SerializeField] private AudioClip HighScoreClip;
     [SerializeField] private AudioClip PowerUpClip;
+    [SerializeField] private AudioClip EnemyHitClip;
 
     // Start executa o que esta dentro dele através da inicializacao do objeto
     void Start()
@@ -143,6 +144,7 @@ public class Script_Player : MonoBehaviour
             if(invulneravel)
             {
                 isAlive = true;
+                PO2.PlaySound(EnemyHitClip);
                 Destroy(col.gameObject);
             }
           }

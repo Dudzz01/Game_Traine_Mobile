@@ -134,6 +134,7 @@ MonoBehaviour:
   CoinClip: {fileID: 8300000, guid: 941dd5621ba0296478ed7807b24eb517, type: 3}
   HighScoreClip: {fileID: 8300000, guid: 9999f138f2dcb8e4a9059894d6761ffa, type: 3}
   PowerUpClip: {fileID: 8300000, guid: 1c4f53f0facb35a46865ea2ca123a962, type: 3}
+  EnemyHitClip: {fileID: 8300000, guid: edb08a720be399346b17e118f33ab117, type: 3}
 --- !u!70 &1984737906999601067
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
