@@ -9,12 +9,14 @@ public class Script_GameController : MonoBehaviour
     public static Script_GameController instance;
     [SerializeField] private Image O2Bar;
     [SerializeField] private Text ScoreTxt;
+    [SerializeField] private Text CoinTxt;
     [SerializeField] private Animator GamOvAnim;
     [SerializeField] private GameObject HighLine;
     private AudioSource AS;
     [SerializeField] private AudioClip GameOverClip;
 
     private float ActualScore;
+    private int coin;
 
     private void Awake()
     {
@@ -50,10 +52,20 @@ public class Script_GameController : MonoBehaviour
         AS.PlayOneShot(GameOverClip);
         if (!PlayerPrefs.HasKey("HighScore") || ActualScore > PlayerPrefs.GetFloat("HighScore"))//PlayerPrefs sao variaveis especiais da Unity
             PlayerPrefs.SetFloat("HighScore", ActualScore);//Que diferente das normais, nao perdem suas informacoes entre cenas
+        int TotalC = coin;
+        if (PlayerPrefs.HasKey("TotalCoins"))
+        {
+            TotalC += PlayerPrefs.GetInt("TotalCoins");
+        }
+        PlayerPrefs.SetInt("TotalCoins", TotalC);
         yield return new WaitForSeconds(2f); //2 segundos e o tempo da animacao     
         Time.timeScale = 0;//apos a anim, pauso o jogo para que nao fique tocando nenhum efeito sonoro
     }
-
+    public void RefreshCoin()
+    {
+        coin++;
+        CoinTxt.text = " X " + coin.ToString();
+    }
     public void ToScene(int index)
     {
         SceneManager.LoadScene(index);

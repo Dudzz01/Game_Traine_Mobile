@@ -8,7 +8,10 @@ public class Enemy_Static : MonoBehaviour
      public GameObject enemy_bullet;
 
      private float contador;
-
+    [SerializeField]
+    private float MaxRange;
+    [SerializeField]
+    private Transform Point;
      
 
       private bool verify_col; // verificando colissao e limitando movimentacao do enemy ao ocorrer isso
@@ -53,11 +56,34 @@ public class Enemy_Static : MonoBehaviour
              {
              this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 10);
              }
+            
         }
     }
-    
-
-     void contadorTempVelY()
+    private void FixedUpdate()
+    {
+        GetPlatformDown();
+    }
+    void GetPlatformDown()
+    {     
+        RaycastHit2D hit = Physics2D.Raycast(Point.position, Vector2.down, MaxRange);//Raycast é um colisor especial da unity, uma linha que
+        //se inicia da posicao do primeiro argumento, segue a direcao do segundo e tem o comprimento do terceiro
+        if(hit.collider != null && (!hit.transform.CompareTag("EnemyBullet") || !hit.transform.CompareTag("Enemy")))
+        {
+            if (hit.transform.CompareTag("Ground"))//Se o raycast encostar no chao...
+            {
+                Debug.Log("Encostou");
+                this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 10);//...ele se movera pra cima
+            }
+            
+        }
+        if(hit.collider == null)//Quando o raycast nao tocar em mais nada
+            this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);//ele para o movimento
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawRay(Point.position, Vector2.down * MaxRange);
+    }
+    void contadorTempVelY()
     {
            contador+=Time.deltaTime;
 

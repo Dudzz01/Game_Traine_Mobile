@@ -39,7 +39,7 @@ public class Spawner_PUp : MonoBehaviour
             else if(Sorter <= 15)//entre 11 e 15
             {//Impulso
                 Instantiate(AllPowers[1], PlatPos.position + Vector3.up * Y_Factor, PlatPos.rotation);
-                PlatToCreate = Random.Range(18, 26);
+                PlatToCreate = Random.Range(22, 29);
             }
             else
             {

@@ -61,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2739877931922564156, guid: 17e11b77c004c9c4fb5b1a8e4a77b706, type: 3}
       propertyPath: m_Name
-      value: Plataform2
+      value: Plataform2 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3245666457309643904, guid: 17e11b77c004c9c4fb5b1a8e4a77b706, type: 3}
       propertyPath: m_RootOrder
@@ -85,7 +85,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3245666457309643904, guid: 17e11b77c004c9c4fb5b1a8e4a77b706, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.370967
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3245666457309643904, guid: 17e11b77c004c9c4fb5b1a8e4a77b706, type: 3}
       propertyPath: m_LocalRotation.w

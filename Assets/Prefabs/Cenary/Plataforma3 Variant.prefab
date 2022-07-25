@@ -61,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2739877931922564156, guid: 1e0e080abe6ca88478dfc0c447f66e29, type: 3}
       propertyPath: m_Name
-      value: Plataforma3
+      value: Plataforma3 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3245666457309643904, guid: 1e0e080abe6ca88478dfc0c447f66e29, type: 3}
       propertyPath: m_RootOrder
@@ -85,7 +85,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3245666457309643904, guid: 1e0e080abe6ca88478dfc0c447f66e29, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.370967
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3245666457309643904, guid: 1e0e080abe6ca88478dfc0c447f66e29, type: 3}
       propertyPath: m_LocalRotation.w
