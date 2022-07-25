@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Procedural_System : MonoBehaviour
-{
-
-     
+{     
     [SerializeField]
     private GameObject player;
     [SerializeField]
     private GameObject spawner_plat;
 
     private float pos_y;
-   
+
+    private float actualPosY;//Posicao da segunda plataforma mais recente
+    [SerializeField]
+    private GameObject EmergencyPlatform;//Plataforma que, caso ocorra o bug de ser gerados plataformas muito longe das outras, sera instanciada entre as platforms
+
 
     // Update is called once per frame
     void Update()
@@ -31,6 +33,15 @@ public class Procedural_System : MonoBehaviour
                 gameObject.GetComponent<Spawner_PUp>().CreatePower(collision.gameObject.transform); // Spawner de powerup
                 gameObject.GetComponent<Spawner_Enemy>().CreateEnemy(collision.gameObject.transform);
                 //Debug.Log(pos_y);
+                
+                float delta_y = collision.gameObject.transform.position.y - actualPosY;
+                //Debug.Log(delta_y);
+                if(delta_y > 10f && actualPosY != 0)
+                {
+                    //Debug.Log("Plataforma inalcancavel");
+                    Instantiate(EmergencyPlatform, (collision.gameObject.transform.position) + Vector3.down * (delta_y / 2), collision.gameObject.transform.rotation);
+                }
+                actualPosY = collision.gameObject.transform.position.y;
             }
             else if(collision.gameObject.name.StartsWith("ground"))
             {

@@ -170,7 +170,7 @@ public class Spawner_Coin : MonoBehaviour
 
     public string selectRandom()
     {
-        int num_random = Random.Range(1,3);
+        int num_random = Random.Range(1,4);
         
         switch(num_random)
         {
