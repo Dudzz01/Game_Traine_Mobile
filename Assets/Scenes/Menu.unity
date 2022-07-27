@@ -195,9 +195,9 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Eduardo Mury\nL\xEDder, Som e Programa\xE7\xE3o\n\nLarissa Coelho\nGame
-    Desing e Programa\xE7\xE3o\n\nJoel Tavares\nGame Design, Som e Programa\xE7\xE3o\n\nVit\xF3ria
+    Design e Programa\xE7\xE3o\n\nJoel Tavares\nGame Design, Som e Programa\xE7\xE3o\n\nVit\xF3ria
     Moraes\nArte e Programa\xE7\xE3o\n\nBernardo Alves\nArte e Programa\xE7\xE3o\n\nIsabelle
-    Figueiredo\nGame Desing e Programa\xE7\xE3o\n\nSandro do Esp\xEDrito Santo\nGestor"
+    Figueiredo\nGame Design e Programa\xE7\xE3o\n\nSandro do Esp\xEDrito Santo\nGestor"
 --- !u!222 &55733065
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1454,7 +1454,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 66, y: -76}
+  m_AnchoredPosition: {x: 53, y: -125}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1419612043
