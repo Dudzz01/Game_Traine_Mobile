@@ -183,9 +183,9 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 55
+    m_FontSize: 52
     m_FontStyle: 1
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 300
     m_Alignment: 1
@@ -194,10 +194,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Eduardo Mury\nSom e Programa\xE7\xE3o\n\nLarissa Coelho\nGame Desing e
-    Programa\xE7\xE3o\n\nJoel Tavares\nGame Design e Programa\xE7\xE3o\n\nVit\xF3ria
+  m_Text: "Eduardo Mury\nL\xEDder, Som e Programa\xE7\xE3o\n\nLarissa Coelho\nGame
+    Desing e Programa\xE7\xE3o\n\nJoel Tavares\nGame Design, Som e Programa\xE7\xE3o\n\nVit\xF3ria
     Moraes\nArte e Programa\xE7\xE3o\n\nBernardo Alves\nArte e Programa\xE7\xE3o\n\nIsabelle
-    Figueiredo\nGame Desing e Programa\xE7\xE3o"
+    Figueiredo\nGame Desing e Programa\xE7\xE3o\n\nSandro do Esp\xEDrito Santo\nGestor"
 --- !u!222 &55733065
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1101,6 +1101,7 @@ GameObject:
   - component: {fileID: 889355065}
   - component: {fileID: 889355064}
   - component: {fileID: 889355063}
+  - component: {fileID: 889355066}
   m_Layer: 5
   m_Name: EnterButton
   m_TagString: Untagged
@@ -1223,6 +1224,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 889355061}
   m_CullTransparentMesh: 1
+--- !u!225 &889355066
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889355061}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1061545301
 GameObject:
   m_ObjectHideFlags: 0
@@ -1343,8 +1356,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 740, y: 0.01178}
-  m_SizeDelta: {x: 662.29, y: 1421.3}
+  m_AnchoredPosition: {x: 740, y: -0.0094604}
+  m_SizeDelta: {x: 662.29, y: 1600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1348568082
 Animator:
@@ -1356,7 +1369,7 @@ Animator:
   m_GameObject: {fileID: 1348568080}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b3fab2a6a131c334ebf938f42b487ce0, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0ec253f0612c4a04bb0026b868e85d2c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1439,9 +1452,9 @@ RectTransform:
   m_Father: {fileID: 1348568081}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -291.14, y: 670.65}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 66, y: -76}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1419612043
@@ -1490,7 +1503,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1451401594}
         m_TargetAssemblyTypeName: Menu_Controller, Assembly-CSharp
-        m_MethodName: SetAnimShop
+        m_MethodName: SetAnimCredits
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1570,6 +1583,9 @@ MonoBehaviour:
   HighText: {fileID: 498279096}
   CoinText: {fileID: 883719672}
   ShopAnim: {fileID: 209925501}
+  CreditsAnim: {fileID: 1348568082}
+  CreditsButton: {fileID: 1861761308}
+  ShopButton: {fileID: 889355061}
 --- !u!4 &1451401595
 Transform:
   m_ObjectHideFlags: 0
@@ -1815,6 +1831,7 @@ GameObject:
   - component: {fileID: 1861761312}
   - component: {fileID: 1861761311}
   - component: {fileID: 1861761310}
+  - component: {fileID: 1861761313}
   m_Layer: 5
   m_Name: EnterButton (1)
   m_TagString: Untagged
@@ -1889,7 +1906,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1451401594}
         m_TargetAssemblyTypeName: Menu_Controller, Assembly-CSharp
-        m_MethodName: SetAnimShop
+        m_MethodName: SetAnimCredits
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1937,6 +1954,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1861761308}
   m_CullTransparentMesh: 1
+--- !u!225 &1861761313
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861761308}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1884653709
 GameObject:
   m_ObjectHideFlags: 0
@@ -2294,7 +2323,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000011444092, y: 0}
+  m_AnchoredPosition: {x: 0.000015258789, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2120251360
