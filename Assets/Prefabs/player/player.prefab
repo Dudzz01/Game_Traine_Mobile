@@ -130,6 +130,9 @@ MonoBehaviour:
   impulseCount: 0
   invulnerabilidadeCount: 0
   invulneravel: 0
+  spritePulo: {fileID: 21300000, guid: b28c2d1b0ff96bc4ba5589ff54aaf91c, type: 3}
+  spriteNormal: {fileID: 21300000, guid: ae3d40a0853f21848b60181bb3dd93c3, type: 3}
+  direcao: 0
   JumpClip: {fileID: 8300000, guid: e202b3d9427cd9d4aac2875eb5b7c76b, type: 3}
   CoinClip: {fileID: 8300000, guid: 941dd5621ba0296478ed7807b24eb517, type: 3}
   HighScoreClip: {fileID: 8300000, guid: 9999f138f2dcb8e4a9059894d6761ffa, type: 3}

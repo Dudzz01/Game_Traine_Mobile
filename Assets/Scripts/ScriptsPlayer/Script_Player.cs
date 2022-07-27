@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Script_Player : MonoBehaviour
-{
-
+{   
     public GameObject right;
     public GameObject left;
     public Rigidbody2D rig; // RigidBody2D do player
@@ -45,7 +44,7 @@ public class Script_Player : MonoBehaviour
         fallValue = 1f;
         impulseTimer = 1.5f;
         canImpulse = false;
-        speed_h = 1000;
+        speed_h = 1200;
         speed_v = 28; //Velocidade Vertical do player
         isAlive = true; // Player está vivo
         PO2 = gameObject.GetComponent<PlayerO2>();//Acessando o script do oxigênio, e todas as suas variaveis e metodos publicos

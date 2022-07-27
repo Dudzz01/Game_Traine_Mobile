@@ -12,6 +12,7 @@ public class Script_GameController : MonoBehaviour
     [SerializeField] private Text CoinTxt;
     [SerializeField] private Animator GamOvAnim;
     [SerializeField] private GameObject HighLine;
+    [SerializeField] private GameObject TutorialObj;
     private AudioSource AS;
     [SerializeField] private AudioClip GameOverClip;
 
@@ -39,9 +40,17 @@ public class Script_GameController : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
-        if (PlayerPrefs.HasKey("HighScore"))
-        {
+        if (PlayerPrefs.HasKey("HighScore"))//Sempre que uso a funcao HasKey(), estou checando se, em algum momento do jogo, ja criei
+        {//Alguma chave (ou seja, variavel especial) de PlayerPrefs com esse nome 
             Instantiate(HighLine, HighLine.transform.position * PlayerPrefs.GetFloat("HighScore"), HighLine.transform.rotation);
+        }
+        if (PlayerPrefs.HasKey("ShowTutorial"))//Se o jogo ja mostrou o tutorial uma vez
+        {
+            TutorialObj.SetActive(false);//ele ira desativar o objeto responsavel pelo tutorial
+        }
+        else if(!PlayerPrefs.HasKey("ShowTutorial"))//Caso contrario
+        {
+            TutorialObj.SetActive(true);//esse objeto estara ativo
         }
         AS = gameObject.GetComponent<AudioSource>();
     }
@@ -56,6 +65,10 @@ public class Script_GameController : MonoBehaviour
         if (PlayerPrefs.HasKey("TotalCoins"))
         {
             TotalC += PlayerPrefs.GetInt("TotalCoins");
+        }
+        if (!PlayerPrefs.HasKey("ShowTutorial"))
+        {
+            PlayerPrefs.SetInt("ShowTutorial", 1);
         }
         PlayerPrefs.SetInt("TotalCoins", TotalC);
         yield return new WaitForSeconds(2f); //2 segundos e o tempo da animacao     

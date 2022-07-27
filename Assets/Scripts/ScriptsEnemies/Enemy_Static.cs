@@ -69,7 +69,7 @@ public class Enemy_Static : MonoBehaviour
         //se inicia da posicao do primeiro argumento, segue a direcao do segundo e tem o comprimento do terceiro
         if(hit.collider != null && (!hit.transform.CompareTag("EnemyBullet") || !hit.transform.CompareTag("Enemy")))
         {
-            if (hit.transform.CompareTag("Ground"))//Se o raycast encostar no chao...
+            if (hit.transform.CompareTag("Ground") || hit.transform.CompareTag("CapsuleO2") || hit.transform.CompareTag("O2FreezePowerUp") || hit.transform.CompareTag("ImpulsePowerUp"))//Se o raycast encostar no chao...
             {
                 Debug.Log("Encostou");
                 this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 10);//...ele se movera pra cima
