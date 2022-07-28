@@ -12,6 +12,13 @@ public class SoundManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(!PlayerPrefs.HasKey("muted"))
+        {
+                PlayerPrefs.SetInt("muted", 0);
+                Load();
+        }
+        else
+            Load();
         UpdateButtonIcon();
         AudioListener.pause = muted;
     }
@@ -41,5 +48,14 @@ public class SoundManager : MonoBehaviour
             soundOn.enabled = false;
             soundOff.enabled = true;
         }
+        Save();
+    }
+    private void Load()
+    {
+        muted = PlayerPrefs.GetInt("muted") == 1;
+    }
+    private void Save()
+    {
+        PlayerPrefs.SetInt("muted", muted ? 1 : 0);
     }
 }
