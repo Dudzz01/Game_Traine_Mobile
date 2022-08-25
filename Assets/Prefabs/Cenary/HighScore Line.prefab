@@ -37,8 +37,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.251, y: 10.9}
-  m_SizeDelta: {x: 811.6759, y: 245.912}
+  m_AnchoredPosition: {x: -0.16774, y: 10.9}
+  m_SizeDelta: {x: 1118.4388, y: 245.912}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8245181059632472086
 Canvas:
@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: 3419145864740409946}
   - component: {fileID: 8767540037448876671}
   - component: {fileID: 1772751293693450595}
+  - component: {fileID: 6407994241360860990}
   m_Layer: 0
   m_Name: Text (Legacy)
   m_TagString: Untagged
@@ -136,8 +137,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0018768, y: 0.0010262}
-  m_SizeDelta: {x: 593.36, y: 245.91}
+  m_AnchoredPosition: {x: 0, y: -12.96}
+  m_SizeDelta: {x: 966.16, y: 219.99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8767540037448876671
 CanvasRenderer:
@@ -168,12 +169,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 109
+    m_Font: {fileID: 12800000, guid: 5dbd163f5c6c8804cb80a5feb4283e06, type: 3}
+    m_FontSize: 170
     m_FontStyle: 1
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 120
+    m_MaxSize: 252
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -181,6 +182,23 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: RECORDE
+--- !u!114 &6407994241360860990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6935213280800247522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4733c21f3850f949a0edc33210d4a8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Port: RECORDE
+  Engl: HIGH SCORE
+  Espa: RECORD
+  Fran: ENREGISTREMENT
+  Ital: RECORD
 --- !u!1 &8953701698661234587
 GameObject:
   m_ObjectHideFlags: 0
