@@ -11,6 +11,7 @@ public class Script_GameController : MonoBehaviour
     [SerializeField] private Text ScoreTxt;
     [SerializeField] private Text CoinTxt;
     [SerializeField] private Animator GamOvAnim;
+    [SerializeField] private Animator BarAnim;
     [SerializeField] private GameObject HighLine;
     [SerializeField] private GameObject TutorialObj;
     private AudioSource AS;
@@ -53,6 +54,14 @@ public class Script_GameController : MonoBehaviour
             TutorialObj.SetActive(true);//esse objeto estara ativo
         }
         AS = gameObject.GetComponent<AudioSource>();
+    }
+    public void BarAnimator(int anim)
+    {
+        BarAnim.SetInteger("transition", anim);
+        //if(anim == 2)
+        //{
+        //    BarAnim.SetInteger("transition", 0);
+        //}
     }
     public IEnumerator GameOver()
     {

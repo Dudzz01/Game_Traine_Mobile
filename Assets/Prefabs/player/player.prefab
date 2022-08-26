@@ -132,6 +132,7 @@ MonoBehaviour:
   invulneravel: 0
   spritePulo: {fileID: 21300000, guid: b28c2d1b0ff96bc4ba5589ff54aaf91c, type: 3}
   spriteNormal: {fileID: 21300000, guid: ae3d40a0853f21848b60181bb3dd93c3, type: 3}
+  freezeColor: {r: 0.44705886, g: 0.7254902, b: 0.86274517, a: 1}
   direcao: 0
   JumpClip: {fileID: 8300000, guid: e202b3d9427cd9d4aac2875eb5b7c76b, type: 3}
   CoinClip: {fileID: 8300000, guid: 941dd5621ba0296478ed7807b24eb517, type: 3}

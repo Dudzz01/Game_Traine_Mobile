@@ -12,32 +12,41 @@ public class Language : MonoBehaviour
     [SerializeField] [TextArea] private string Fran;
     [SerializeField] [TextArea] private string Ital;
 
-
-    void Start()
+    private void Awake()
     {
         Sentence = GetComponent<Text>();
+    }
+    void Start()
+    {
         RefreshTexts();
     }
 
     public void RefreshTexts()
     {
-        switch (PlayerPrefs.GetInt("Language"))
+        if(Sentence != null)
         {
-            case 0: 
-                Sentence.text = Port;
-                break;
-            case 1:
-                Sentence.text = Engl;
-                break;
-            case 2:
-                Sentence.text = Espa;
-                break;
-            case 3:
-                Sentence.text = Fran;
-                break;
-            case 4:
-                Sentence.text = Ital;
-                break;
+            switch (PlayerPrefs.GetInt("Language"))
+            {
+                case 0:
+                    Sentence.text = Port;
+                    break;
+                case 1:
+                    Sentence.text = Engl;
+                    break;
+                case 2:
+                    Sentence.text = Espa;
+                    break;
+                case 3:
+                    Sentence.text = Fran;
+                    break;
+                case 4:
+                    Sentence.text = Ital;
+                    break;
+            }
+        }
+        else
+        {
+            Debug.Log(Sentence.name);
         }
     }
 }

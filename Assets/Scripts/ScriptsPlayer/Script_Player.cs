@@ -31,6 +31,7 @@ public class Script_Player : MonoBehaviour
     private SpriteRenderer spriterenderer;
     [SerializeField] private Sprite spritePulo;
     [SerializeField] private Sprite spriteNormal;
+    [SerializeField] private Color freezeColor;
     [SerializeField] private float direcao;
     [SerializeField] private AudioClip JumpClip;
     [SerializeField] private AudioClip CoinClip;
@@ -193,7 +194,8 @@ public class Script_Player : MonoBehaviour
         if (o2FreezeCount > 0) 
         {
             PO2.setDecreasingO2(false);
-            
+            this.gameObject.GetComponent<SpriteRenderer>().color = freezeColor;
+            Script_GameController.instance.BarAnimator(1);
             invulneravel = true;
             
             o2FreezeCount -= Time.deltaTime;
@@ -201,11 +203,13 @@ public class Script_Player : MonoBehaviour
         else if(o2FreezeCount <= 0) 
         {
             PO2.setDecreasingO2(true);
-            
-            if(getImpulsing() == false)
+            this.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+            Script_GameController.instance.BarAnimator(2);
+            if (getImpulsing() == false)
             {
-            invulneravel = false;
-            setFreezing(false);
+                invulneravel = false;
+                setFreezing(false);
+                
             }
             else if(getImpulsing() == true && getFreezing() == false)
             {
@@ -219,6 +223,7 @@ public class Script_Player : MonoBehaviour
             {
                 invulneravel = false;
                 setFreezing(false);
+
             }
             else if(getFreezing() == false && getImpulsing() == false)
             {
@@ -242,15 +247,14 @@ public class Script_Player : MonoBehaviour
             rig.AddForce(new Vector2(rig.velocity.x, 30f),ForceMode2D.Impulse);
             impulseCount -= Time.deltaTime;
         }
-        else if(impulseCount <= 0)
-        {
+        else if(impulseCount <= 0 &&  rig.velocity.y < 0) //Adicionei esse operador para garantir que a Laika so deixara
+        {//de ficar invensivel quando estiver indo para baixo. Uma garantia de que ela nao morra enquanto ainda avanca para cima
             if(getFreezing() == false)
             {
-                //se nao esta ocorrendo o uso do powerup de congelamento de o2
-            
-            invulneravel = false;
-            this.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-            setImpulsing(false);
+                //se nao esta ocorrendo o uso do powerup de congelamento de o2            
+                invulneravel = false;
+                this.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                setImpulsing(false);
             }
             else if(getFreezing() == true && getImpulsing() == false)
             {
@@ -262,8 +266,7 @@ public class Script_Player : MonoBehaviour
             }
             else if(getFreezing() == false && getImpulsing() == true)
             {
-                //se nao esta ocorrendo o uso de powerup de congelamento de O2 e esta ocorrendo o o powerup de impulso
-                
+                //se nao esta ocorrendo o uso de powerup de congelamento de O2 e esta ocorrendo o o powerup de impulso               
                 invulneravel = false;
                 this.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
                 setImpulsing(false);
