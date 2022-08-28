@@ -9,6 +9,7 @@ public class Menu_Controller : MonoBehaviour
     [SerializeField] private Text HighText;
     [SerializeField] private Text CoinText;
     [SerializeField] private Toggle[] AllToggles;
+    [SerializeField] private Slider Sens;
 
     [SerializeField] private Animator ShopAnim;
     [SerializeField] private Animator CreditsAnim;
@@ -61,6 +62,10 @@ public class Menu_Controller : MonoBehaviour
         }
         if (PlayerPrefs.HasKey("TotalCoins"))
             CoinText.text = " X " + PlayerPrefs.GetInt("TotalCoins").ToString();
+        //if (!PlayerPrefs.HasKey("Sensibility"))
+        //    PlayerPrefs.SetFloat("Sensibility", 1f);
+        Sens.normalizedValue = PlayerPrefs.GetFloat("Sensibility") - 1;
+        
     }
     void RefreshRecord()
     {
@@ -85,13 +90,21 @@ public class Menu_Controller : MonoBehaviour
     }
     public void SetLanguage(int lang)
     {
-        allLangs= FindObjectsOfType<Language>();
+        allLangs = FindObjectsOfType<Language>();
         PlayerPrefs.SetInt("Language", lang);
         RefreshRecord();
-        if(allLangs.Length > 0)
+        if (allLangs.Length > 0)
         {
             for (int i = 0; i < allLangs.Length; i++)
                 allLangs[i].RefreshTexts();
         }
+
+
+    }
+    
+    public void SetSensibility()
+    {        
+        PlayerPrefs.SetFloat("Sensibility", Sens.value);
+        //Debug.Log(Sens.fillRect.);
     }
 }

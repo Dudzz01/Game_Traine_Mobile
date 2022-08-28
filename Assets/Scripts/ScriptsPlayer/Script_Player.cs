@@ -117,7 +117,7 @@ public class Script_Player : MonoBehaviour
 
     public void Movement()//Input.acceleration é a classe responsável pelo acelerometro. Ao chamar .x, ela usa apenas esse eixo para a movimentação do player
     {
-        rig.velocity = new Vector2(Input.acceleration.x * speed_h * Time.fixedDeltaTime, rig.velocity.y);//rig.velocity.y garante que esse eixo não vai mudar com essa linha
+        rig.velocity = new Vector2(Input.acceleration.x * speed_h * Time.fixedDeltaTime * (PlayerPrefs.GetFloat("Sensibility")), rig.velocity.y);//rig.velocity.y garante que esse eixo não vai mudar com essa linha
     }
     void OnCollisionEnter2D(Collision2D collision) // Um metodo que basicamente verifica a colisao do nosso player com qualquer outro objeto que tenha um colisor
     {
