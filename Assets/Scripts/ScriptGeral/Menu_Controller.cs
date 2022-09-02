@@ -62,9 +62,10 @@ public class Menu_Controller : MonoBehaviour
         }
         if (PlayerPrefs.HasKey("TotalCoins"))
             CoinText.text = " X " + PlayerPrefs.GetInt("TotalCoins").ToString();
-        //if (!PlayerPrefs.HasKey("Sensibility"))
-        //    PlayerPrefs.SetFloat("Sensibility", 1f);
-        Sens.normalizedValue = PlayerPrefs.GetFloat("Sensibility") - 1;
+        if (!PlayerPrefs.HasKey("Sensibility"))
+            PlayerPrefs.SetFloat("Sensibility", 1f);
+
+        Sens.value = PlayerPrefs.GetFloat("Sensibility");
         
     }
     void RefreshRecord()
@@ -103,7 +104,7 @@ public class Menu_Controller : MonoBehaviour
     }
     
     public void SetSensibility()
-    {        
+    {   
         PlayerPrefs.SetFloat("Sensibility", Sens.value);
         //Debug.Log(Sens.fillRect.);
     }

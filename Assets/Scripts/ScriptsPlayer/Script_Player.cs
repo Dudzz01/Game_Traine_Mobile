@@ -106,8 +106,10 @@ public class Script_Player : MonoBehaviour
             jump = false;
         }
         Movement();
-        freezeO2();
-        impulso();
+        if(getFreezing() == true)
+            freezeO2();
+        if(getImpulsing() == true)
+            impulso();
         if(enable_pick == true)
         {
         pickCoin();
@@ -121,7 +123,7 @@ public class Script_Player : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision) // Um metodo que basicamente verifica a colisao do nosso player com qualquer outro objeto que tenha um colisor
     {
-         if(collision.gameObject.tag == "Ground" && collision.gameObject.transform.position.y+1 < this.transform.position.y) // Se o player colidir com um objeto que tenha um colisor e tenha a etiqueta "Ground" e o y dele for maior que o y da plataforma que esta colidindo, executará um impulso
+         if(collision.gameObject.tag == "Ground" && rig.velocity.y <= 0 && collision.gameObject.transform.position.y+1 < this.transform.position.y) // Se o player colidir com um objeto que tenha um colisor e tenha a etiqueta "Ground" e o y dele for maior que o y da plataforma que esta colidindo, executará um impulso
          {
             jump = true;
         
@@ -247,43 +249,48 @@ public class Script_Player : MonoBehaviour
             rig.AddForce(new Vector2(rig.velocity.x, 30f),ForceMode2D.Impulse);
             impulseCount -= Time.deltaTime;
         }
-        else if(impulseCount <= 0 &&  rig.velocity.y < 0) //Adicionei esse operador para garantir que a Laika so deixara
+        else if(impulseCount <= 0) //Adicionei esse operador para garantir que a Laika so deixara
         {//de ficar invensivel quando estiver indo para baixo. Uma garantia de que ela nao morra enquanto ainda avanca para cima
-            if(getFreezing() == false)
+            if(rig.velocity.y < 0)
             {
-                //se nao esta ocorrendo o uso do powerup de congelamento de o2            
-                invulneravel = false;
-                this.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-                setImpulsing(false);
-            }
-            else if(getFreezing() == true && getImpulsing() == false)
-            {
-                //se esta ocorrendo o uso de powerup de congelamento de O2 e nao esta ocorrendo o o powerup de impulso
-            }
-            else if(getFreezing() == true && getImpulsing() == true)
-            {
-                setImpulsing(false);
-            }
-            else if(getFreezing() == false && getImpulsing() == true)
-            {
-                //se nao esta ocorrendo o uso de powerup de congelamento de O2 e esta ocorrendo o o powerup de impulso               
-                invulneravel = false;
-                this.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-                setImpulsing(false);
-            }
-            else if(getFreezing() == false && getImpulsing() == false)
-            {
-                 Debug.Log("ta chamand liks");
-                 invulneravel = false;
-                 
-            }
-            else if(getImpulsing() == true)
-            {
-                 invulneravel = false;
-                this.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-                setImpulsing(false);
-            }
+                Debug.Log("Acabou o impulso");
+                if (getFreezing() == false)
+                {
+                    //se nao esta ocorrendo o uso do powerup de congelamento de o2            
+                    invulneravel = false;
+                    this.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                    setImpulsing(false);
+                }
+                else if (getFreezing() == true && getImpulsing() == false)
+                {
+                    //se esta ocorrendo o uso de powerup de congelamento de O2 e nao esta ocorrendo o o powerup de impulso
+                }
+                else if (getFreezing() == true && getImpulsing() == true)
+                {
+                    setImpulsing(false);
+                }
+                else if (getFreezing() == false && getImpulsing() == true)
+                {
+                    //se nao esta ocorrendo o uso de powerup de congelamento de O2 e esta ocorrendo o o powerup de impulso               
+                    invulneravel = false;
+                    this.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                    setImpulsing(false);
+                }
+                else if (getFreezing() == false && getImpulsing() == false)
+                {
+                    Debug.Log("ta chamand liks");
+                    invulneravel = false;
+
+                }
+                else if (getImpulsing() == true)
+                {
+                    invulneravel = false;
+                    this.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                    setImpulsing(false);
+                }
+            }            
         }
+        
     }
 
     public void setEnablePickCoin(bool enable_pick) // metodo setter que seta o valor da permissao de pegar a moeda

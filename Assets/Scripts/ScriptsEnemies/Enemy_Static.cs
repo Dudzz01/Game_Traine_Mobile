@@ -71,7 +71,6 @@ public class Enemy_Static : MonoBehaviour
         {
             if (hit.transform.CompareTag("Ground") || hit.transform.CompareTag("CapsuleO2") || hit.transform.CompareTag("O2FreezePowerUp") || hit.transform.CompareTag("ImpulsePowerUp"))//Se o raycast encostar no chao...
             {
-                Debug.Log("Encostou");
                 this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 10);//...ele se movera pra cima
             }
             
