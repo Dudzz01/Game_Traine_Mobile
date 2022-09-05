@@ -73,19 +73,19 @@ public class Menu_Controller : MonoBehaviour
         switch (PlayerPrefs.GetInt("Language"))
         {
             case 0:
-                HighText.text = HighText.text = "RECORDE\n" + PlayerPrefs.GetFloat("HighScore").ToString("F2");
+                HighText.text = HighText.text = "RECORDE\n" + PlayerPrefs.GetFloat("HighScore").ToString();
                 break;
             case 1:
-                HighText.text = HighText.text = "HIGH SCORE\n" + PlayerPrefs.GetFloat("HighScore").ToString("F2");
+                HighText.text = HighText.text = "HIGH SCORE\n" + PlayerPrefs.GetFloat("HighScore").ToString();
                 break;
             case 2:
-                HighText.text = HighText.text = "RECORD\n" + PlayerPrefs.GetFloat("HighScore").ToString("F2");
+                HighText.text = HighText.text = "RECORD\n" + PlayerPrefs.GetFloat("HighScore").ToString();
                 break;
             case 3:
-                HighText.text = HighText.text = "ENGERISTREMENT\n" + PlayerPrefs.GetFloat("HighScore").ToString("F2");
+                HighText.text = HighText.text = "ENGERISTREMENT\n" + PlayerPrefs.GetFloat("HighScore").ToString();
                 break;
             case 4:
-                HighText.text = HighText.text = "RECORD\n" + PlayerPrefs.GetFloat("HighScore").ToString("F2");
+                HighText.text = HighText.text = "RECORD\n" + PlayerPrefs.GetFloat("HighScore").ToString();
                 break;
         }
     }

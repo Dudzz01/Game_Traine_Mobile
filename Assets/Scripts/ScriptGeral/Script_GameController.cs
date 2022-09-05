@@ -17,7 +17,7 @@ public class Script_GameController : MonoBehaviour
     private AudioSource AS;
     [SerializeField] private AudioClip GameOverClip;
 
-    private float ActualScore;
+    private int ActualScore;
     private int coin;
 
     private void Awake()
@@ -34,8 +34,8 @@ public class Script_GameController : MonoBehaviour
     {
         if(playerPos.position.y > ActualScore)
         {
-            ActualScore = playerPos.position.y;
-            ScoreTxt.text = ActualScore.ToString("F2");
+            ActualScore = (int)playerPos.position.y;
+            ScoreTxt.text = ActualScore.ToString();
         }
     }
     void Start()
