@@ -19,9 +19,11 @@ public class Script_GameController : MonoBehaviour
 
     private int ActualScore;
     private int coin;
+    private int multiplicador;
 
     private void Awake()
     {
+        multiplicador = 3;
         instance = this; //A partir dessa linha, todas as variaveis e funcoes publicas podem ser acessadas de outros scripts
     }
     
@@ -32,9 +34,9 @@ public class Script_GameController : MonoBehaviour
     
     public void Score(Transform playerPos)
     {
-        if(playerPos.position.y > ActualScore)
+        if(multiplicador * playerPos.position.y > ActualScore)
         {
-            ActualScore = (int)playerPos.position.y;
+            ActualScore = multiplicador * (int)playerPos.position.y;
             ScoreTxt.text = ActualScore.ToString();
         }
     }
