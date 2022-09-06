@@ -45,7 +45,7 @@ public class Script_GameController : MonoBehaviour
         Application.targetFrameRate = 60;
         if (PlayerPrefs.HasKey("HighScore"))//Sempre que uso a funcao HasKey(), estou checando se, em algum momento do jogo, ja criei
         {//Alguma chave (ou seja, variavel especial) de PlayerPrefs com esse nome 
-            Instantiate(HighLine, HighLine.transform.position * PlayerPrefs.GetFloat("HighScore"), HighLine.transform.rotation);
+            Instantiate(HighLine, (HighLine.transform.position * PlayerPrefs.GetFloat("HighScore")) / multiplicador, HighLine.transform.rotation);
         }
         if (PlayerPrefs.HasKey("ShowTutorial"))//Se o jogo ja mostrou o tutorial uma vez
         {
