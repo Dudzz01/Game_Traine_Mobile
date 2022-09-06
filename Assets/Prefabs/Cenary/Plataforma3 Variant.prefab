@@ -59,6 +59,10 @@ PrefabInstance:
       propertyPath: m_DrawMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1361677978236617506, guid: 1e0e080abe6ca88478dfc0c447f66e29, type: 3}
+      propertyPath: m_SurfaceArc
+      value: 160
+      objectReference: {fileID: 0}
     - target: {fileID: 2739877931922564156, guid: 1e0e080abe6ca88478dfc0c447f66e29, type: 3}
       propertyPath: m_Name
       value: Plataforma3 Variant
