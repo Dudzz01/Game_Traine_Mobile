@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.Profiling;
 public class Script_GameController : MonoBehaviour
 {
     public static Script_GameController instance;
@@ -57,6 +57,11 @@ public class Script_GameController : MonoBehaviour
         }
         AS = gameObject.GetComponent<AudioSource>();
     }
+    
+    void Update(){
+        ShowCoin();
+    }
+   
     public void BarAnimator(int anim)
     {
         BarAnim.SetInteger("transition", anim);
@@ -88,6 +93,10 @@ public class Script_GameController : MonoBehaviour
     public void RefreshCoin()
     {
         coin++;
+        
+    }
+
+    public void ShowCoin(){
         CoinTxt.text = " X " + coin.ToString();
     }
     public void ToScene(int index)

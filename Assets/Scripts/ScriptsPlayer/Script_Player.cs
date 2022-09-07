@@ -81,6 +81,7 @@ public class Script_Player : MonoBehaviour
       
       Script_GameController.instance.Score(transform);
       
+      
       if (isAlive == false)
       {
         Destroy(this.gameObject); // Player é destruido
@@ -296,13 +297,13 @@ public class Script_Player : MonoBehaviour
     public void setEnablePickCoin(bool enable_pick) // metodo setter que seta o valor da permissao de pegar a moeda
     {
         this.enable_pick = enable_pick;
+        Script_GameController.instance.RefreshCoin();
     }
 
     public void pickCoin()
     {    // se a moeda for pega...
         
         PO2.PlaySound(CoinClip);
-        Script_GameController.instance.RefreshCoin();
         vel_limit = 40f; // o limitador da velocidade do player aumenta
          if(rig.velocity.y <0) // se no momento em que o player pega a moeda, ele estiver indo para baixo, ou seja, a velocidade dele é negativa
          {
