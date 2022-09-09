@@ -14,8 +14,8 @@ public class SoundManager : MonoBehaviour
     {
         if(!PlayerPrefs.HasKey("muted"))
         {
-                PlayerPrefs.SetInt("muted", 0);
-                Load();
+            PlayerPrefs.SetInt("muted", 0);
+            Load();
         }
         else
             Load();
@@ -31,10 +31,12 @@ public class SoundManager : MonoBehaviour
             AudioListener.pause = true;
         }
 
-        else{
+        else
+        {
             muted = false;
             AudioListener.pause = false;
         }
+        Save();
         UpdateButtonIcon();
     }
     private void UpdateButtonIcon()
