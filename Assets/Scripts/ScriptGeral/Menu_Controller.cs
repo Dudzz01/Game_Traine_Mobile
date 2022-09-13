@@ -18,8 +18,11 @@ public class Menu_Controller : MonoBehaviour
     [SerializeField] private GameObject CreditsButton;
     [SerializeField] private GameObject ShopButton;
     [SerializeField] private GameObject OptButton;
+    [SerializeField] private GameObject playButton;
+    [SerializeField] private GameObject imageRecord;
 
     private bool ButtonState = true;
+    private float distanceBeetweenImages = 0;
 
     private Language[] allLangs;
     public void startGame()
@@ -70,22 +73,33 @@ public class Menu_Controller : MonoBehaviour
     }
     void RefreshRecord()
     {
+        
         switch (PlayerPrefs.GetInt("Language"))
         {
             case 0:
                 HighText.text = HighText.text = "RECORDE\n" + PlayerPrefs.GetFloat("HighScore").ToString();
+                distanceBeetweenImages = imageRecord.transform.position.y - playButton.transform.position.y;
+                HighText.transform.position = new Vector2(HighText.transform.position.x,distanceBeetweenImages+playButton.transform.position.y);
                 break;
             case 1:
                 HighText.text = HighText.text = "HIGH SCORE\n" + PlayerPrefs.GetFloat("HighScore").ToString();
+                distanceBeetweenImages = imageRecord.transform.position.y - playButton.transform.position.y;
+                HighText.transform.position = new Vector2(HighText.transform.position.x,distanceBeetweenImages+playButton.transform.position.y);
                 break;
             case 2:
                 HighText.text = HighText.text = "RECORD\n" + PlayerPrefs.GetFloat("HighScore").ToString();
+                distanceBeetweenImages = imageRecord.transform.position.y - playButton.transform.position.y;
+                HighText.transform.position = new Vector2(HighText.transform.position.x,distanceBeetweenImages+playButton.transform.position.y);
                 break;
             case 3:
                 HighText.text = HighText.text = "ENGERISTREMENT\n" + PlayerPrefs.GetFloat("HighScore").ToString();
+                distanceBeetweenImages = imageRecord.transform.position.y - playButton.transform.position.y;
+                HighText.transform.position = new Vector2(HighText.transform.position.x,distanceBeetweenImages+playButton.transform.position.y);
                 break;
             case 4:
                 HighText.text = HighText.text = "RECORD\n" + PlayerPrefs.GetFloat("HighScore").ToString();
+                distanceBeetweenImages = imageRecord.transform.position.y - playButton.transform.position.y;
+                HighText.transform.position = new Vector2(HighText.transform.position.x,distanceBeetweenImages+playButton.transform.position.y);
                 break;
         }
     }
