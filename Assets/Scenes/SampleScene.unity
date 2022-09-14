@@ -1128,7 +1128,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.49947312, y: 1}
+    m_SensorSize: {x: 0.5, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1145,7 +1145,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319898286}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.879364, y: 15.161, z: -10}
+  m_LocalPosition: {x: -0.87950134, y: 15.161, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1386,7 +1386,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.879364, y: 15.161, z: -10}
+  m_LocalPosition: {x: -0.87950134, y: 15.161, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4528,7 +4528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4733c21f3850f949a0edc33210d4a8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Port: "Voc\xEA morreu :c"
+  Port: "Voc\xEA \nmorreu :c"
   Engl: You died :c
   Espa: Moriste :c
   Fran: Tu es mort :c
@@ -4581,7 +4581,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Voc\xEA Morreu :c"
+  m_Text: "Voc\xEA \nMorreu :c"
 --- !u!222 &1890167945
 CanvasRenderer:
   m_ObjectHideFlags: 0
