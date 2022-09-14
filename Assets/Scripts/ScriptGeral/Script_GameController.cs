@@ -9,6 +9,7 @@ public class Script_GameController : MonoBehaviour
     public static Script_GameController instance;
     [SerializeField] private Image O2Bar;
     [SerializeField] private Text ScoreTxt;
+    [SerializeField] private Text scoreGameOver;
     [SerializeField] private Text CoinTxt;
     [SerializeField] private Animator GamOvAnim;
     [SerializeField] private Animator BarAnim;
@@ -74,6 +75,7 @@ public class Script_GameController : MonoBehaviour
     {
         GamOvAnim.SetTrigger("die");//Chamo animacao de game over
         Debug.Log("Morreu");
+        ShowScoreGameOver();
         AS.PlayOneShot(GameOverClip);
         if (!PlayerPrefs.HasKey("HighScore") || ActualScore > PlayerPrefs.GetFloat("HighScore"))//PlayerPrefs sao variaveis especiais da Unity
             PlayerPrefs.SetFloat("HighScore", ActualScore);//Que diferente das normais, nao perdem suas informacoes entre cenas
@@ -98,6 +100,10 @@ public class Script_GameController : MonoBehaviour
 
     public void ShowCoin(){
         CoinTxt.text = " X " + coin.ToString();
+    }
+
+    public void ShowScoreGameOver(){
+        scoreGameOver.text = "Record\n" + ActualScore.ToString();
     }
     public void ToScene(int index)
     {
