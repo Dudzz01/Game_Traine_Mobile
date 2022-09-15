@@ -58,7 +58,7 @@ public class Script_Player : MonoBehaviour
     // Update executa o que esta dentro dele a todo instante to jogo
     void Update()
     {
-        direcao = Input.acceleration.x;
+        direcao = Input.acceleration.x * Time.deltaTime; // essa multipicação faz com que esse valor acompanhe o tempo do jogo(trava rotação no pause)
         if(direcao > 0)
         {
             this.transform.localScale = new Vector3(1, this.transform.localScale.y);

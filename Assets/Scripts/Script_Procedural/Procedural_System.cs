@@ -29,7 +29,7 @@ public class Procedural_System : MonoBehaviour
             //Destroy(collision.gameObject);
             if(collision.gameObject.name.StartsWith("Plataform") || collision.gameObject.name.StartsWith("Plataform2") || collision.gameObject.name.StartsWith("Plataforma3"))
             {
-                collision.gameObject.transform.position = new Vector2(Random.Range(-6.3f,6.3f), pos_y-1 );
+                collision.gameObject.transform.position = new Vector2(Random.Range(-7f,7f), pos_y-1 );
                 gameObject.GetComponent<Spawner_PUp>().CreatePower(collision.gameObject.transform); // Spawner de powerup
                 gameObject.GetComponent<Spawner_Enemy>().CreateEnemy(collision.gameObject.transform);
                 //Debug.Log(pos_y);
