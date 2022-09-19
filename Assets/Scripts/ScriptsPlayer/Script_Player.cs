@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 public class Script_Player : MonoBehaviour
 {   
-    public GameObject right;
-    public GameObject left;
+   
     public Rigidbody2D rig; // RigidBody2D do player
     private float speed_v; // Velocidade Vertical do player
     private float speed_h; // Velocidade Horizontal do player
@@ -38,6 +38,7 @@ public class Script_Player : MonoBehaviour
     [SerializeField] private AudioClip HighScoreClip;
     [SerializeField] private AudioClip PowerUpClip;
     [SerializeField] private AudioClip EnemyHitClip;
+    [SerializeField] private GameObject camera;
 
     // Start executa o que esta dentro dele através da inicializacao do objeto
     void Start()
@@ -59,6 +60,9 @@ public class Script_Player : MonoBehaviour
     void Update()
     {
         direcao = Input.acceleration.x * Time.deltaTime; // essa multipicação faz com que esse valor acompanhe o tempo do jogo(trava rotação no pause)
+        
+        TeleportPlayerSide();
+
         if(direcao > 0)
         {
             this.transform.localScale = new Vector3(1, this.transform.localScale.y);
@@ -66,7 +70,6 @@ public class Script_Player : MonoBehaviour
         {
             this.transform.localScale = new Vector3(-1, this.transform.localScale.y);
         }
-
         if(rig.velocity.y > fallValue)
         {
             spriterenderer.sprite = spritePulo;
@@ -74,18 +77,16 @@ public class Script_Player : MonoBehaviour
         {
             spriterenderer.sprite = spriteNormal;
         }
-        
-      //Debug.Log(rig.velocity.y);
-      right.transform.position = new Vector3(right.transform.position.x,this.gameObject.transform.position.y,right.transform.position.z);
-      left.transform.position = new Vector3(left.transform.position.x,this.gameObject.transform.position.y,left.transform.position.z);
-      
-      Script_GameController.instance.Score(transform);
+
+         Script_GameController.instance.Score(transform);
       
       
-      if (isAlive == false)
-      {
-        Destroy(this.gameObject); // Player é destruido
-      } 
+        if (isAlive == false)
+        {
+            Destroy(this.gameObject); // Player é destruido
+        } 
+      
+      
     }
     
     void FixedUpdate() 
@@ -154,14 +155,7 @@ public class Script_Player : MonoBehaviour
         //Efeito de atravessar a tela: Existem 2 colisores como filhos da camera (ou seja, onde a camera for, eles irão atras).
         //Nesses if's, o código está checando em qual borda o player encostou, para enviá-lo para o exato oposto da tela, Somando ou
         //Diminuindo um valor pequeno, apenas para garantir que, nesse "teletransporte", ele venha a se chocar com a outra borda
-        if (col.CompareTag("RightBorder"))
-        {
-            transform.position = new Vector3((transform.position.x * -1) + (float)0.3, transform.position.y, transform.position.z);
-        }
-        if (col.CompareTag("LeftBorder"))
-        {
-            transform.position = new Vector3((transform.position.x * -1) - (float)0.5, transform.position.y, transform.position.z);
-        }
+        
         //Obs.: Precisei desativar a cinemachine pois a cam estava seguindo o player também no eixo x, e assim, a logica não funcionava
           if(col.gameObject.tag == "Enemy" || col.gameObject.tag == "EnemyBullet")
           {
@@ -337,4 +331,17 @@ public class Script_Player : MonoBehaviour
     {
         return this.impulsing;
     }    
+
+    public void TeleportPlayerSide(){  //Sistema de teletransportar o player se ultrapassar o limite da camera(NAO MUDEM NENHUM VALOR!!!!!)
+        if(this.transform.position.x > camera.transform.position.x+12)
+        {
+            transform.position = new Vector3((transform.position.x * -1) + (float)1, transform.position.y, transform.position.z);
+        }
+        else if(this.transform.position.x < camera.transform.position.x-11)
+        {
+            transform.position = new Vector3((transform.position.x * -1) - (float)1.5, transform.position.y, transform.position.z);
+        }
+    }
+
+    
 }
