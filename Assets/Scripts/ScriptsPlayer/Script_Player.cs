@@ -47,7 +47,7 @@ public class Script_Player : MonoBehaviour
         impulseTimer = 1.5f;
         canImpulse = false;
         speed_h = 1200;
-        speed_v = 28; //Velocidade Vertical do player
+        speed_v = 29; //Velocidade Vertical do player
         isAlive = true; // Player está vivo
         PO2 = gameObject.GetComponent<PlayerO2>();//Acessando o script do oxigênio, e todas as suas variaveis e metodos publicos
         invulneravel = false;
@@ -99,7 +99,7 @@ public class Script_Player : MonoBehaviour
         }
         if(rig.velocity.y >vel_limit && enable_pick == false) // Condicao para que o player consiga no maximo pular com 20 de velocidade( nao consegue ter uma velocidade maior que isso em seu pulo, utilizei esse codigo para corrigir um bug)
         {
-            rig.velocity = new Vector2(0,vel_limit-4); // Caso o player ultrapasse a velocidade 20, a velocidade dele vertical fica 16
+            rig.velocity = new Vector2(0,vel_limit-1); // Caso o player ultrapasse a velocidade 20, a velocidade dele vertical fica 16
         }
         if(jump == true && rig.velocity.y <= vel_limit)
         {

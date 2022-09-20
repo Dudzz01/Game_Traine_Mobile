@@ -30,20 +30,20 @@ public class Spawner_PUp : MonoBehaviour
             {
                 Debug.Log("ESSE E PWP AZUL");
                 Instantiate(AllPowers[2], PlatPos.position + Vector3.up * Y_Factor, PlatPos.rotation);//Capsula de O2
-                PlatToCreate = Random.Range(5, 10);
+                PlatToCreate = Random.Range(5, 9);
             }
             else if(Sorter <= 10 && Sorter > 5)
             {//Impulso
                 
                 Debug.Log("ESSE E IMPULSO");
                 Instantiate(AllPowers[1], PlatPos.position + Vector3.up * Y_Factor, PlatPos.rotation); // Impulso
-                PlatToCreate = Random.Range(22, 29);
+                PlatToCreate = Random.Range(10, 15);
             }
             else if(Sorter>10)
             {
                 Debug.Log("ESSE E OXIGENIO");
                 Instantiate(AllPowers[0], PlatPos.position + Vector3.up * Y_Factor, PlatPos.rotation);
-                PlatToCreate = Random.Range(5, 10);
+                PlatToCreate = Random.Range(5, 9);
             }
             CurrentPlat = 0;
             
