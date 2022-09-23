@@ -333,13 +333,13 @@ public class Script_Player : MonoBehaviour
     }    
 
     public void TeleportPlayerSide(){  //Sistema de teletransportar o player se ultrapassar o limite da camera(NAO MUDEM NENHUM VALOR!!!!!)
-        if(this.transform.position.x > camera.transform.position.x+12)
+        if(this.transform.position.x > camera.transform.position.x+11.5) // Direita
         {
-            transform.position = new Vector3((transform.position.x * -1) + (float)1, transform.position.y, transform.position.z);
+            transform.position = new Vector3((transform.position.x * -1) -0.5f, transform.position.y, transform.position.z);
         }
-        else if(this.transform.position.x < camera.transform.position.x-11)
+        else if(this.transform.position.x < camera.transform.position.x-11) // Esquerda
         {
-            transform.position = new Vector3((transform.position.x * -1) - (float)1.5, transform.position.y, transform.position.z);
+            transform.position = new Vector3((transform.position.x * -1) - 2f, transform.position.y, transform.position.z);
         }
     }
 
